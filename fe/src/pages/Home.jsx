@@ -10,18 +10,8 @@ import { useEffect } from "react";
 import ProductTable from "../components/ProductTable";
 
 export default function Home() {
-  const URL = "http://localhost:8080/products";
-  const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetchUserData();
-  }, []);
-
-  async function fetchUserData() {
-    const FETCHED_DATA = await fetch(URL);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
-  }
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar
@@ -40,11 +30,13 @@ export default function Home() {
       <Routes>
         <Route
           path="/productlist"
-          element={<ProductTable users={users} setUsers={setUsers} URL={URL} />}
+          element={<ProductTable products={products} />}
         />
         <Route
           path="/addproduct"
-          element={<ProductForm users={users} setUsers={setUsers} URL={URL} />}
+          element={
+            <ProductForm products={products} setProducts={setProducts} />
+          }
         />
         <Route path="/userlist" element={<Users />} />
         <Route path="/adduser" element={<UserForm />} />

@@ -1,10 +1,19 @@
 import { Container } from "@mui/system";
-import { useState } from "react";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
+import { useEffect } from "react";
 
-export default function ProductForm() {
+export default function ProductForm({ products, setProducts }) {
   const URL = "http://localhost:8080/products";
-  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  async function fetchUserData() {
+    const FETCHED_DATA = await fetch(URL);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setProducts(FETCHED_JSON.data);
+  }
   // const newUser = {
   //   image: "",
   //   id: "",
@@ -38,8 +47,8 @@ export default function ProductForm() {
     };
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
-    console.log(users);
+    setProducts(FETCHED_JSON.data);
+    console.log(products);
   }
 
   return (
@@ -48,71 +57,65 @@ export default function ProductForm() {
         NEW PRODUCT
       </Typography>
       <Box maxWidth="md" sx={{ margin: "0 auto" }}>
-        <FormControl
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-          fullWidth={true}
-          onSubmit={handleSubmit}
-        >
-          {/* <TextField
-              name={"image"}
-              type={"image"}
-              label={"Upload image"}
+        <form onSubmit={handleSubmit}>
+          <FormControl
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+            fullWidth={true}
+          >
+            <TextField
+              name={"productname"}
+              type={"text"}
+              label={"Product name"}
               variant={"outlined"}
-              fullWidth={"true"}
-            /> */}
-          <TextField
-            name={"productname"}
-            type={"text"}
-            label={"Product name"}
-            variant={"outlined"}
-            fullWidth={true}
-          />
-          <TextField
-            name={"price"}
-            type={"text"}
-            label={"Price"}
-            variant={"outlined"}
-            fullWidth={true}
-          />
-          <TextField
-            name={"stock"}
-            type={"number"}
-            label={"Stock"}
-            variant={"outlined"}
-            fullWidth={true}
-          />
-          <TextField
-            name={"color"}
-            type={"text"}
-            label={"Color"}
-            variant={"outlined"}
-            fullWidth={true}
-          />
-          <TextField
-            name={"category"}
-            type={"text"}
-            label={"Category"}
-            variant={"outlined"}
-            fullWidth={true}
-          />
-          <TextField
-            name={"description"}
-            type={"text"}
-            label={"Description"}
-            variant={"outlined"}
-            fullWidth={true}
-          />
+              fullWidth={true}
+            />
+            <TextField
+              name={"price"}
+              type={"text"}
+              label={"Price"}
+              variant={"outlined"}
+              fullWidth={true}
+            />
+            <TextField
+              name={"stock"}
+              type={"number"}
+              label={"Stock"}
+              variant={"outlined"}
+              fullWidth={true}
+            />
+            <TextField
+              name={"color"}
+              type={"text"}
+              label={"Color"}
+              variant={"outlined"}
+              fullWidth={true}
+            />
+            <TextField
+              name={"category"}
+              type={"text"}
+              label={"Category"}
+              variant={"outlined"}
+              fullWidth={true}
+            />
+            <TextField
+              name={"description"}
+              type={"text"}
+              label={"Description"}
+              variant={"outlined"}
+              fullWidth={true}
+            />
+          </FormControl>
 
-          <Button variant={"outlined"} color={"primary"}>
+          <Button type={"submit"} variant={"outlined"} color={"primary"}>
             Add
           </Button>
-        </FormControl>
+        </form>
       </Box>
     </Container>
   );
