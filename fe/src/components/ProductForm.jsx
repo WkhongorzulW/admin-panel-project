@@ -4,16 +4,6 @@ import { useEffect } from "react";
 
 export default function ProductForm({ products, setProducts }) {
   const URL = "http://localhost:8080/products";
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
-
-  async function fetchUserData() {
-    const FETCHED_DATA = await fetch(URL);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setProducts(FETCHED_JSON.data);
-  }
   // const newUser = {
   //   image: "",
   //   id: "",
@@ -112,7 +102,7 @@ export default function ProductForm({ products, setProducts }) {
             />
           </FormControl>
 
-          <Button type={"submit"} variant={"outlined"} color={"primary"}>
+          <Button type="submit" variant={"outlined"} color={"primary"}>
             Add
           </Button>
         </form>
