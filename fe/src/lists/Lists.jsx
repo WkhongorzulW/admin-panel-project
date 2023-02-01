@@ -10,26 +10,10 @@ export function LIprofile() {
   );
 }
 
-export function LIdashboard() {
-  return (
-    <Link to={"/dashboard"}>
-      <ListItemText primary={"Dashboard"} />
-    </Link>
-  );
-}
-
 export function LIEcommerce() {
   return (
     <Link to={"/ecommerce"}>
       <ListItemText primary={"E-commerce"} />
-    </Link>
-  );
-}
-
-export function LIuser() {
-  return (
-    <Link to={"/users"}>
-      <ListItemText primary={"User"} />
     </Link>
   );
 }

@@ -1,24 +1,21 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
+import {
+  Box,
+  Drawer,
+  Toolbar,
+  List,
+  Divider,
+  ListItemText,
+} from "@mui/material";
+import { ListItem, ListItemButton, ListItemIcon } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HomeIcon from "@mui/icons-material/Home";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import DescriptionIcon from "@mui/icons-material/Description";
-import {
-  LIdashboard,
-  LIdoc,
-  LIEcommerce,
-  LIprofile,
-  LIuser,
-} from "../lists/Lists";
+import { LIdoc, LIEcommerce, LIprofile } from "../lists/Lists";
+import { LIdashboard } from "../lists/LIdashboard";
+import { LIuser } from "../lists/LIuser";
 
 const texts = [
   <LIprofile />,
@@ -57,7 +54,7 @@ export default function SideBar() {
             <ListItem key={index} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{icons[index]}</ListItemIcon>
-                {text}
+                <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
           ))}
