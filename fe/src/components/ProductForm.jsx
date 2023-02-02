@@ -1,25 +1,28 @@
 import { Container } from "@mui/system";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import {
+  handlePname,
+  handlePrice,
+  handleStock,
+  handleColor,
+  handleCategory,
+  handleDescription,
+} from "../services/EditProduct";
 
 export default function ProductForm({ products, setProducts }) {
   const URL = "http://localhost:8080/products";
-  // const newUser = {
-  //   image: "",
-  //   id: "",
-  //   productname: "",
-  //   price: "",
-  //   stock: "",
-  //   color: "",
-  //   category: "",
-  //   description: "",
-  // };
+  const navigate = useNavigate();
+  const productData = useLocation();
+  console.log(productData);
+  const [currentProduct, setCurrentProduct] = useState([]);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("hi");
+    console.log("product");
 
-    const postUserData = {
+    const postProductData = {
       productname: e.target.productname.value,
       price: e.target.price.value,
       stock: e.target.stock.value,
@@ -33,12 +36,13 @@ export default function ProductForm({ products, setProducts }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(postUserData),
+      body: JSON.stringify(postProductData),
     };
     const FETCHED_DATA = await fetch(URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
     setProducts(FETCHED_JSON.data);
-    console.log(products);
+
+    navigate("/productlist");
   }
 
   return (
@@ -62,47 +66,58 @@ export default function ProductForm({ products, setProducts }) {
               name={"productname"}
               type={"text"}
               label={"Product name"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handlePname(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"price"}
               type={"text"}
               label={"Price"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handlePrice(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"stock"}
               type={"number"}
               label={"Stock"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handleStock(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"color"}
               type={"text"}
               label={"Color"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handleColor(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"category"}
               type={"text"}
               label={"Category"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handleCategory(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"description"}
               type={"text"}
               label={"Description"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handleDescription(currentProduct, setCurrentProduct)}
             />
           </FormControl>
 
-          <Button type="submit" variant={"outlined"} color={"primary"}>
+          <Button
+            type="submit"
+            variant={"outlined"}
+            sx={{ marginTop: 2 }}
+            color={"primary"}
+          >
             Add
           </Button>
         </form>

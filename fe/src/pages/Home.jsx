@@ -3,15 +3,14 @@ import { Route, Routes } from "react-router-dom";
 import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 import SideBar from "../components/SideBar";
 import ProductForm from "../components/ProductForm";
-import Users from "./User";
 import UserForm from "../components/UserForm";
 import { useState } from "react";
-import { useEffect } from "react";
 import ProductTable from "../components/ProductTable";
+import UsersTable from "../components/UsersTable";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-
+  const [users, setUsers] = useState([]);
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar
@@ -30,7 +29,9 @@ export default function Home() {
       <Routes>
         <Route
           path="/productlist"
-          element={<ProductTable products={products} />}
+          element={
+            <ProductTable products={products} setProducts={setProducts} />
+          }
         />
         <Route
           path="/addproduct"
@@ -38,8 +39,14 @@ export default function Home() {
             <ProductForm products={products} setProducts={setProducts} />
           }
         />
-        <Route path="/userlist" element={<Users />} />
-        <Route path="/adduser" element={<UserForm />} />
+        <Route
+          path="/userlist"
+          element={<UsersTable users={users} setUsers={setUsers} />}
+        />
+        <Route
+          path="/adduser"
+          element={<UserForm users={users} setUsers={setUsers} />}
+        />
       </Routes>
     </Box>
   );
