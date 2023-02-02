@@ -1,6 +1,6 @@
 import { Container } from "@mui/system";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductForm({ products, setProducts }) {
   const URL = "http://localhost:8080/products";

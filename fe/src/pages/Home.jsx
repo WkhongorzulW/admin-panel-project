@@ -6,7 +6,6 @@ import ProductForm from "../components/ProductForm";
 import Users from "./User";
 import UserForm from "../components/UserForm";
 import { useState } from "react";
-import { useEffect } from "react";
 import ProductTable from "../components/ProductTable";
 
 export default function Home() {
