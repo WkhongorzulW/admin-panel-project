@@ -11,7 +11,7 @@ import ProductTable from "../components/ProductTable";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-
+  const [users, setUsers] = useState([]);
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar
@@ -38,8 +38,14 @@ export default function Home() {
             <ProductForm products={products} setProducts={setProducts} />
           }
         />
-        <Route path="/userlist" element={<Users />} />
-        <Route path="/adduser" element={<UserForm />} />
+        <Route
+          path="/userlist"
+          element={<Users users={users} setUsers={setUsers} />}
+        />
+        <Route
+          path="/adduser"
+          element={<UserForm users={users} setUsers={setUsers} />}
+        />
       </Routes>
     </Box>
   );

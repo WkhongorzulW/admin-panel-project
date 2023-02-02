@@ -31,7 +31,7 @@ app.post("/products", (request, response) => {
   const body = request.body;
   console.log(body);
 
-  const newUser = {
+  const newProduct = {
     id: Date.now().toString(),
     productname: body.productname,
     price: body.price,
@@ -50,18 +50,77 @@ app.post("/products", (request, response) => {
     }
 
     const dataObject = JSON.parse(readData);
-    console.log(dataObject);
-    console.log("================");
-    dataObject.push(newUser);
-    console.log(dataObject);
+    dataObject.push(newProduct);
 
     fs.writeFile(
-      "./data/products.json",
+      "./public/data/products.json",
       JSON.stringify(dataObject),
       (writeError) => {
         if (writeError) {
           response.json({
-            staus: "error during file write",
+            status: "error during file write",
+            data: [],
+          });
+        }
+        response.json({
+          status: "success",
+          data: dataObject,
+        });
+      }
+    );
+  });
+});
+
+/*-------------- GET /users/ -----------------*/
+app.get("/users", (request, response) => {
+  fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file reader error",
+        data: [],
+      });
+    }
+    const objectData = JSON.parse(readData);
+
+    response.json({
+      status: "success",
+      data: objectData,
+    });
+  });
+});
+
+app.post("/users", (request, response) => {
+  const body = request.body;
+  console.log(body);
+
+  const newUser = {
+    id: Date.now().toString(),
+    firstname: body.firstname,
+    lastname: body.lastname,
+    email: body.email,
+    age: body.age,
+    phonenumber: body.phonenumber,
+    role: body.role,
+  };
+
+  fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file reader error",
+        data: [],
+      });
+    }
+
+    const dataObject = JSON.parse(readData);
+    dataObject.push(newUser);
+
+    fs.writeFile(
+      "./public/data/users.json",
+      JSON.stringify(dataObject),
+      (writeError) => {
+        if (writeError) {
+          response.json({
+            status: "error during write file",
             data: [],
           });
         }
