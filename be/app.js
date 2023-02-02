@@ -71,6 +71,83 @@ app.post("/products", (request, response) => {
   });
 });
 
+/*-------------- DELETE /product/ ------------*/
+app.delete("/products", (request, response) => {
+  const body = request.body;
+
+  fs.readFile("./public/data/products.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file reader error",
+        data: [],
+      });
+    }
+
+    const readObject = JSON.parse(readData);
+    const filteredObject = readObject.filter((o) => o.id !== body.productId);
+
+    fs.writeFile(
+      "./public/data/products.json",
+      JSON.stringify(filteredObject),
+      (writeError) => {
+        if (writeError) {
+          response.json({
+            status: "error during write file",
+            data: [],
+          });
+        }
+        response.json({
+          status: "success",
+          data: filteredObject,
+        });
+      }
+    );
+  });
+});
+
+/*--------------- PUT /products/ ----------------*/
+app.put("/products", (request, response) => {
+  const body = request.body;
+  fs.readFile("./public/data/products.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file reader error",
+        data: [],
+      });
+    }
+
+    const savedData = JSON.parse(readData);
+    const changedData = savedData.map((d) => {
+      if (d.id === body.id) {
+        (d.productname = body.productname),
+          (d.price = body.price),
+          (d.stock = body.stock),
+          (d.color = body.color),
+          (d.category = body.category),
+          (d.description = body.description);
+      }
+      return d;
+    });
+
+    fs.writeFile(
+      "./public/data/products.json",
+      JSON.stringify(changedData),
+      (writeError) => {
+        if (writeError) {
+          response.json({
+            status: "error during write file",
+            data: [],
+          });
+        }
+        response.json({
+          status: "success",
+          data: changedData,
+        });
+      }
+    );
+  });
+});
+
 /*-------------- GET /users/ -----------------*/
 app.get("/users", (request, response) => {
   fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
@@ -127,6 +204,40 @@ app.post("/users", (request, response) => {
         response.json({
           status: "success",
           data: dataObject,
+        });
+      }
+    );
+  });
+});
+
+/*-------------- DELETE /users/ ------------*/
+app.delete("/users", (request, response) => {
+  const body = request.body;
+
+  fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file reader error",
+        data: [],
+      });
+    }
+
+    const readObject = JSON.parse(readData);
+    const filteredObject = readObject.filter((o) => o.id !== body.userId);
+
+    fs.writeFile(
+      "./public/data/usres.json",
+      JSON.stringify(filteredObject),
+      (writeError) => {
+        if (writeError) {
+          response.json({
+            status: "error during write file",
+            data: [],
+          });
+        }
+        response.json({
+          status: "success",
+          data: filteredObject,
         });
       }
     );

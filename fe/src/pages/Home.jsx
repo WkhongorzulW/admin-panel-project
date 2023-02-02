@@ -3,10 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 import SideBar from "../components/SideBar";
 import ProductForm from "../components/ProductForm";
-import Users from "./User";
 import UserForm from "../components/UserForm";
 import { useState } from "react";
 import ProductTable from "../components/ProductTable";
+import UsersTable from "../components/UsersTable";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -29,7 +29,9 @@ export default function Home() {
       <Routes>
         <Route
           path="/productlist"
-          element={<ProductTable products={products} />}
+          element={
+            <ProductTable products={products} setProducts={setProducts} />
+          }
         />
         <Route
           path="/addproduct"
@@ -39,7 +41,7 @@ export default function Home() {
         />
         <Route
           path="/userlist"
-          element={<Users users={users} setUsers={setUsers} />}
+          element={<UsersTable users={users} setUsers={setUsers} />}
         />
         <Route
           path="/adduser"

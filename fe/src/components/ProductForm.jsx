@@ -1,20 +1,22 @@
 import { Container } from "@mui/system";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import {
+  handlePname,
+  handlePrice,
+  handleStock,
+  handleColor,
+  handleCategory,
+  handleDescription,
+} from "../services/EditProduct";
 
 export default function ProductForm({ products, setProducts }) {
   const URL = "http://localhost:8080/products";
   const navigate = useNavigate();
-  // const newUser = {
-  //   image: "",
-  //   id: "",
-  //   productname: "",
-  //   price: "",
-  //   stock: "",
-  //   color: "",
-  //   category: "",
-  //   description: "",
-  // };
+  const productData = useLocation();
+  console.log(productData);
+  const [currentProduct, setCurrentProduct] = useState([]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -64,43 +66,49 @@ export default function ProductForm({ products, setProducts }) {
               name={"productname"}
               type={"text"}
               label={"Product name"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handlePname(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"price"}
               type={"text"}
               label={"Price"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handlePrice(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"stock"}
               type={"number"}
               label={"Stock"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handleStock(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"color"}
               type={"text"}
               label={"Color"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handleColor(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"category"}
               type={"text"}
               label={"Category"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handleCategory(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"description"}
               type={"text"}
               label={"Description"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
+              // onChange={handleDescription(currentProduct, setCurrentProduct)}
             />
           </FormControl>
 
