@@ -226,7 +226,7 @@ app.delete("/users", (request, response) => {
     const filteredObject = readObject.filter((o) => o.id !== body.userId);
 
     fs.writeFile(
-      "./public/data/usres.json",
+      "./public/data/users.json",
       JSON.stringify(filteredObject),
       (writeError) => {
         if (writeError) {
