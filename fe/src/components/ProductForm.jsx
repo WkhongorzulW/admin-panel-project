@@ -68,7 +68,7 @@ export default function ProductForm({ products, setProducts }) {
               label={"Product name"}
               variant={"filled"}
               fullWidth={true}
-              // onChange={handlePname(currentProduct, setCurrentProduct)}
+              //onChange={handlePname(currentProduct, setCurrentProduct)}
             />
             <TextField
               name={"price"}
@@ -116,7 +116,7 @@ export default function ProductForm({ products, setProducts }) {
             type="submit"
             variant={"outlined"}
             sx={{ marginTop: 2 }}
-            color={"primary"}
+            color={"success"}
           >
             Add
           </Button>

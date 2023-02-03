@@ -58,8 +58,8 @@ export default function ProductTable({ products, setProducts }) {
     { field: "description", headerName: "Description", with: 150 },
     { field: "price", headerName: "Price", with: 50 },
     { field: "stock", headerName: "Stock", with: 80 },
-    { field: "color", headerName: "Color", with: 50 },
-    { field: "category", headerName: "Category", width: 120 },
+    { field: "color", headerName: "Color", with: 80 },
+    { field: "category", headerName: "Category", width: 90 },
     {
       field: "actions",
       headerName: "Actions",
@@ -69,7 +69,7 @@ export default function ProductTable({ products, setProducts }) {
           <Box>
             <Link to={"/addproduct"}>
               <Button
-                // onClick={() => handleEdit(params.row.id)}
+                onClick={() => handleEdit(params.row.id)}
                 state={{
                   product: products.filter((p) => p.id === params.row.id),
                 }}
