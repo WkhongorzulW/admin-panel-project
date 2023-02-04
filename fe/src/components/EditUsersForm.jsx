@@ -52,7 +52,7 @@ export default function EditUsersForm({ users, setUsers }) {
     };
 
     const options = {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -68,7 +68,7 @@ export default function EditUsersForm({ users, setUsers }) {
   return (
     <Container maxWidth="lg" sx={{ margin: "0 auto", paddingBottom: 5 }}>
       <Typography variant="h3" sx={{ marginBottom: 2 }}>
-        ADD USER
+        EDIT USER
       </Typography>
       <Box maxWidth="md" sx={{ margin: "0 auto" }}>
         <FormControl
@@ -87,6 +87,7 @@ export default function EditUsersForm({ users, setUsers }) {
             label={"First name"}
             variant={"outlined"}
             fullWidth={true}
+            defaultValue={currentUser.firstname}
             onChange={handleFirstname}
           />
           <TextField
@@ -95,6 +96,7 @@ export default function EditUsersForm({ users, setUsers }) {
             label={"Last name"}
             variant={"outlined"}
             fullWidth={true}
+            defaultValue={currentUser.lastname}
             onChange={handleLastname}
           />
           <TextField
@@ -103,6 +105,7 @@ export default function EditUsersForm({ users, setUsers }) {
             label={"Email"}
             variant={"outlined"}
             fullWidth={true}
+            defaultValue={currentUser.email}
             onChange={handleEmail}
           />
           <TextField
@@ -111,6 +114,7 @@ export default function EditUsersForm({ users, setUsers }) {
             label={"Age"}
             variant={"outlined"}
             fullWidth={true}
+            defaultValue={currentUser.age}
             onChange={handleAge}
           />
           <TextField
@@ -119,6 +123,7 @@ export default function EditUsersForm({ users, setUsers }) {
             label={"Phone number"}
             variant={"outlined"}
             fullWidth={true}
+            defaultValue={currentUser.phonenumber}
             onChange={handlePhoneNumber}
           />
           <FormControlLabel value="female" control={<Radio />} label="Female" />
@@ -130,6 +135,7 @@ export default function EditUsersForm({ users, setUsers }) {
             label={"Role"}
             variant={"outlined"}
             fullWidth={true}
+            defaultValue={currentUser.role}
             onChange={handleRole}
           />
           <TextField
@@ -154,8 +160,9 @@ export default function EditUsersForm({ users, setUsers }) {
           type="submit"
           sx={{ marginTop: 2 }}
           color={"primary"}
+          onClick={handleEdit}
         >
-          Submit
+          Save
         </Button>
       </Box>
     </Container>

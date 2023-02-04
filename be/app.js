@@ -131,9 +131,6 @@ app.put("/products", (request, response) => {
       return d;
     });
 
-    console.log(savedData);
-    console.log(changedData);
-
     fs.writeFile(
       "./public/data/products.json",
       JSON.stringify(changedData),
@@ -246,6 +243,46 @@ app.delete("/users", (request, response) => {
         });
       }
     );
+  });
+});
+
+app.put("/users", (request, response) => {
+  const body = request.body;
+
+  fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file reader error",
+        data: [],
+      });
+    }
+
+    const savedData = JSON.parse(readData);
+
+    const changedData = savedData.map((d) => {
+      if (d.id === body.id) {
+        (d.firstname = body.firstname),
+          (d.lastname = body.lastname),
+          (d.email = body.email),
+          (d.age = body.age),
+          (d.phonenumber = body.phonenumber),
+          (d.role = body.role);
+      }
+      return d;
+    });
+
+    fs.writeFile("./public/data/users.json", "utf-8", (writeError) => {
+      if (writeError) {
+        response.json({
+          status: "error during write file",
+          data: [],
+        });
+      }
+      response.json({
+        status: "success",
+        data: changedData,
+      });
+    });
   });
 });
 
