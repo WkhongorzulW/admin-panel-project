@@ -9,38 +9,17 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { addUsers } from "../services/UsersServices";
 
-export default function UserForm({ users, setUsers }) {
+export default function UserForm({ setUsers }) {
   const URL = "http://localhost:8080/users";
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    console.log("user");
-
-    const postUserData = {
-      firstname: e.target.firstname.value,
-      lastname: e.target.lastname.value,
-      email: e.target.email.value,
-      age: e.target.age.value,
-      phonenumber: e.target.phonenumber.value,
-      role: e.target.role.value,
-    };
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postUserData),
-    };
-
-    const FETCHED_DATA = await fetch(URL, options);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
-
+    addUsers(e, setUsers, URL);
     navigate("/userlist");
   }
+
   return (
     <Container maxWidth="lg" sx={{ margin: "0 auto", paddingBottom: 5 }}>
       <Typography variant="h3" sx={{ marginBottom: 2 }}>
@@ -125,10 +104,10 @@ export default function UserForm({ users, setUsers }) {
           </FormControl>
 
           <Button
-            variant={"filled"}
+            variant={"contained"}
             type="submit"
             sx={{ marginTop: 2 }}
-            color={"primary"}
+            color={"success"}
           >
             Submit
           </Button>

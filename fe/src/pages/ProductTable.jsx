@@ -5,6 +5,7 @@ import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { deleteProduct } from "../services/ProductsServices";
 
 export default function ProductTable({ products, setProducts }) {
   const URL = "http://localhost:8080/products";
@@ -20,19 +21,7 @@ export default function ProductTable({ products, setProducts }) {
   }
 
   async function handleDelete(productId) {
-    const options = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        productId: productId,
-      }),
-    };
-
-    const FETCHED_DATA = await fetch(URL, options);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setProducts(FETCHED_JSON.data);
+    deleteProduct(productId, setProducts, URL);
   }
 
   const columns = [
@@ -57,7 +46,7 @@ export default function ProductTable({ products, setProducts }) {
                 product: products.filter((p) => p.id === params.row.id),
               }}
             >
-              <Button color={"primary"} variant={"outlined"}>
+              <Button color={"info"} variant={"outlined"}>
                 <AutoFixHighOutlinedIcon />
               </Button>
             </Link>{" "}

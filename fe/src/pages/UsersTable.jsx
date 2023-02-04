@@ -5,6 +5,7 @@ import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { deleteUser } from "../services/UsersServices";
 
 export default function UsersTable({ users, setUsers }) {
   const URL = "http://localhost:8080/users";
@@ -20,23 +21,11 @@ export default function UsersTable({ users, setUsers }) {
   }
 
   async function handleDelete(userId) {
-    const options = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: userId,
-      }),
-    };
-
-    const FETCHED_DATA = await fetch(URL, options);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    deleteUser(userId, setUsers, URL);
   }
 
   const columns = [
-    { field: "id", headerName: "ID", width: 200 },
+    { field: "id", headerName: "ID", width: 130 },
     { field: "firstname", headerName: "First name", width: 130 },
     { field: "lastname", headerName: "Last name", width: 130 },
     { field: "phonenumber", headerName: "Phone number", width: 130 },
@@ -45,7 +34,7 @@ export default function UsersTable({ users, setUsers }) {
       field: "age",
       headerName: "Age",
       type: "number",
-      width: 50,
+      width: 80,
     },
     {
       field: "role",
@@ -63,11 +52,15 @@ export default function UsersTable({ users, setUsers }) {
               to={`/edituser/${params.row.id}`}
               state={{ user: users.filter((u) => u.id === params.row.id) }}
             >
-              <Button>
+              <Button color="info" variant="outlined">
                 <AutoFixHighOutlinedIcon />
               </Button>
-            </Link>
-            <Button onClick={() => handleDelete(params.row.id)}>
+            </Link>{" "}
+            <Button
+              onClick={() => handleDelete(params.row.id)}
+              color="error"
+              variant="contained"
+            >
               <DeleteOutlineIcon />
             </Button>
           </Box>

@@ -2,7 +2,9 @@ import { Container } from "@mui/system";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-export default function EditProductsForm({ products, setProducts }) {
+import { editProduct } from "../services/ProductsServices";
+
+export default function EditProductsForm({ setProducts }) {
   const URL = "http://localhost:8080/products";
 
   const productData = useLocation();
@@ -32,29 +34,7 @@ export default function EditProductsForm({ products, setProducts }) {
   }
 
   async function handleEdit(e) {
-    e.preventDefault();
-
-    const putProductData = {
-      id: currentProduct.id,
-      productname: currentProduct.productname,
-      price: currentProduct.price,
-      stock: currentProduct.stock,
-      color: currentProduct.color,
-      category: currentProduct.category,
-      description: currentProduct.description,
-    };
-
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(putProductData),
-    };
-    const FETCHED_DATA = await fetch(URL, options);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setProducts(FETCHED_JSON.data);
-
+    editProduct(e, setProducts, URL, currentProduct);
     navigate("/productlist");
   }
 
@@ -133,7 +113,7 @@ export default function EditProductsForm({ products, setProducts }) {
 
           <Button
             type="submit"
-            variant={"outlined"}
+            variant={"contained"}
             sx={{ marginTop: 2 }}
             color={"success"}
             onClick={handleEdit}

@@ -1,34 +1,14 @@
 import { Container } from "@mui/system";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { addProduct } from "../services/ProductsServices";
 
-export default function ProductForm({ products, setProducts }) {
+export default function ProductForm({ setProducts }) {
   const URL = "http://localhost:8080/products";
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    e.preventDefault();
-
-    const postProductData = {
-      productname: e.target.productname.value,
-      price: e.target.price.value,
-      stock: e.target.stock.value,
-      color: e.target.color.value,
-      category: e.target.category.value,
-      description: e.target.description.value,
-    };
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postProductData),
-    };
-    const FETCHED_DATA = await fetch(URL, options);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setProducts(FETCHED_JSON.data);
-
+    addProduct(e, setProducts, URL);
     navigate("/productlist");
   }
 
@@ -94,7 +74,7 @@ export default function ProductForm({ products, setProducts }) {
 
           <Button
             type="submit"
-            variant={"outlined"}
+            variant={"contained"}
             sx={{ marginTop: 2 }}
             color={"success"}
           >

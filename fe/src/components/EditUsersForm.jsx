@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { editUser } from "../services/UsersServices";
 
 export default function EditUsersForm({ users, setUsers }) {
   const URL = "http://localhost:8080/users";
@@ -18,6 +19,12 @@ export default function EditUsersForm({ users, setUsers }) {
   const userData = useLocation();
 
   const [currentUser, setCurrentUser] = useState(userData.state.user[0]);
+
+  async function handleEdit(e) {
+    e.preventDefault();
+    editUser(e, setUsers, URL, currentUser);
+    navigate("/userlist");
+  }
 
   function handleFirstname(e) {
     setCurrentUser({ ...currentUser, firstname: e.target.value });
@@ -38,33 +45,6 @@ export default function EditUsersForm({ users, setUsers }) {
     setCurrentUser({ ...currentUser, role: e.target.value });
   }
 
-  async function handleEdit(e) {
-    e.preventDefault();
-
-    const putUserData = {
-      id: currentUser.id,
-      firstname: currentUser.firstname,
-      lastname: currentUser.lastname,
-      email: currentUser.email,
-      age: currentUser.age,
-      phonenumber: currentUser.phoneNumber,
-      role: currentUser.role,
-    };
-
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(putUserData),
-    };
-
-    const FETCHED_DATA = await fetch(URL, options);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
-
-    navigate("/userlist");
-  }
   return (
     <Container maxWidth="lg" sx={{ margin: "0 auto", paddingBottom: 5 }}>
       <Typography variant="h3" sx={{ marginBottom: 2 }}>
@@ -156,10 +136,10 @@ export default function EditUsersForm({ users, setUsers }) {
         </FormControl>
 
         <Button
-          variant={"outlined"}
+          variant={"contained"}
           type="submit"
           sx={{ marginTop: 2 }}
-          color={"primary"}
+          color={"success"}
           onClick={handleEdit}
         >
           Save

@@ -150,6 +150,8 @@ app.put("/products", (request, response) => {
   });
 });
 
+/*=======================================================*/
+
 /*-------------- GET /users/ -----------------*/
 app.get("/users", (request, response) => {
   fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
@@ -246,6 +248,7 @@ app.delete("/users", (request, response) => {
   });
 });
 
+/*--------------- PUT /users/ ------------*/
 app.put("/users", (request, response) => {
   const body = request.body;
 
@@ -271,18 +274,22 @@ app.put("/users", (request, response) => {
       return d;
     });
 
-    fs.writeFile("./public/data/users.json", "utf-8", (writeError) => {
-      if (writeError) {
+    fs.writeFile(
+      "./public/data/users.json",
+      JSON.stringify(changedData),
+      (writeError) => {
+        if (writeError) {
+          response.json({
+            status: "error during write file",
+            data: [],
+          });
+        }
         response.json({
-          status: "error during write file",
-          data: [],
+          status: "success",
+          data: changedData,
         });
       }
-      response.json({
-        status: "success",
-        data: changedData,
-      });
-    });
+    );
   });
 });
 
