@@ -62,35 +62,35 @@ export default function UserForm({ users, setUsers }) {
               name={"firstname"}
               type={"text"}
               label={"First name"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
             />
             <TextField
               name={"lastname"}
               type={"text"}
               label={"Last name"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
             />
             <TextField
               name={"email"}
               type={"email"}
               label={"Email"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
             />
             <TextField
               name={"age"}
               type={"number"}
               label={"Age"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
             />
             <TextField
               name={"phonenumber"}
               type={"tel"}
               label={"Phone number"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
             />
             <FormControlLabel
@@ -104,14 +104,14 @@ export default function UserForm({ users, setUsers }) {
               name={"role"}
               type={"text"}
               label={"Role"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
             />
             <TextField
               name={"image"}
               type={"file"}
               label={"Upload image"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
             />
 
@@ -119,13 +119,13 @@ export default function UserForm({ users, setUsers }) {
               name={"password"}
               type={"password"}
               label={"Password"}
-              variant={"outlined"}
+              variant={"filled"}
               fullWidth={true}
             />
           </FormControl>
 
           <Button
-            variant={"outlined"}
+            variant={"filled"}
             type="submit"
             sx={{ marginTop: 2 }}
             color={"primary"}

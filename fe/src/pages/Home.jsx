@@ -5,8 +5,10 @@ import SideBar from "../components/SideBar";
 import ProductForm from "../components/ProductForm";
 import UserForm from "../components/UserForm";
 import { useState } from "react";
-import ProductTable from "../components/ProductTable";
-import UsersTable from "../components/UsersTable";
+import ProductTable from "./ProductTable";
+import UsersTable from "./UsersTable";
+import EditProductsForm from "../components/EditProductsForm";
+import EditUsersForm from "../components/EditUsersForm";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -40,12 +42,22 @@ export default function Home() {
           }
         />
         <Route
+          path="/editproduct/:id"
+          element={
+            <EditProductsForm products={products} setProducts={setProducts} />
+          }
+        />
+        <Route
           path="/userlist"
           element={<UsersTable users={users} setUsers={setUsers} />}
         />
         <Route
           path="/adduser"
           element={<UserForm users={users} setUsers={setUsers} />}
+        />
+        <Route
+          path={"/edituser/:id"}
+          element={<EditUsersForm users={users} setUsers={setUsers} />}
         />
       </Routes>
     </Box>

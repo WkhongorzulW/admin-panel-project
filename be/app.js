@@ -108,6 +108,7 @@ app.delete("/products", (request, response) => {
 /*--------------- PUT /products/ ----------------*/
 app.put("/products", (request, response) => {
   const body = request.body;
+
   fs.readFile("./public/data/products.json", "utf-8", (readError, readData) => {
     if (readError) {
       response.json({
@@ -117,6 +118,7 @@ app.put("/products", (request, response) => {
     }
 
     const savedData = JSON.parse(readData);
+
     const changedData = savedData.map((d) => {
       if (d.id === body.id) {
         (d.productname = body.productname),
@@ -128,6 +130,9 @@ app.put("/products", (request, response) => {
       }
       return d;
     });
+
+    console.log(savedData);
+    console.log(changedData);
 
     fs.writeFile(
       "./public/data/products.json",

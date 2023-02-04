@@ -59,8 +59,10 @@ export default function UsersTable({ users, setUsers }) {
       renderCell: (params) => {
         return (
           <Box>
-            <Link to={"/adduser"}>
-              <Button>
+            <Link to={`/edituser/${params.row.id}`}>
+              <Button
+                state={{ user: users.map((u) => u.id === params.row.id) }}
+              >
                 <AutoFixHighOutlinedIcon />
               </Button>
             </Link>
