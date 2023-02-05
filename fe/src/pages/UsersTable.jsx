@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { deleteUser } from "../services/UsersServices";
+import { ULBreadCrumbs } from "../components/UBreadCrumbs";
 
 export default function UsersTable({ users, setUsers }) {
   const URL = "http://localhost:8080/users";
@@ -71,6 +72,7 @@ export default function UsersTable({ users, setUsers }) {
 
   return (
     <Container style={{ height: 400, width: "100%" }}>
+      <ULBreadCrumbs />
       <Typography variant="h3" sx={{ mb: 3 }}>
         Users page
       </Typography>

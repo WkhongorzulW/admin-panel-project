@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { deleteProduct } from "../services/ProductsServices";
+import { PLBreadCrumbs } from "../components/PBreadCrumbs";
 
 export default function ProductTable({ products, setProducts }) {
   const URL = "http://localhost:8080/products";
@@ -65,8 +66,9 @@ export default function ProductTable({ products, setProducts }) {
 
   return (
     <Container style={{ height: 400, width: "100%" }}>
+      <PLBreadCrumbs />
       <Typography variant="h3" marginBottom={3}>
-        Product Page
+        Products
       </Typography>
       <DataGrid
         rows={products}
@@ -75,6 +77,12 @@ export default function ProductTable({ products, setProducts }) {
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
+
+      <Link to={"/addproduct"}>
+        <Button color="success" variant="contained" sx={{ marginTop: 5 }}>
+          BACK
+        </Button>
+      </Link>
     </Container>
   );
 }

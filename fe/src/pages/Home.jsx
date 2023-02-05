@@ -2,13 +2,13 @@ import * as React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 import SideBar from "../components/SideBar";
-import ProductForm from "../components/ProductForm";
-import UserForm from "../components/UserForm";
+import ProductForm from "./ProductForm";
+import UserForm from "./UserForm";
 import { useState } from "react";
 import ProductTable from "./ProductTable";
 import UsersTable from "./UsersTable";
-import EditProductsForm from "../components/EditProductsForm";
-import EditUsersForm from "../components/EditUsersForm";
+import EditProductsForm from "./EditProductsForm";
+import EditUsersForm from "./EditUsersForm";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
