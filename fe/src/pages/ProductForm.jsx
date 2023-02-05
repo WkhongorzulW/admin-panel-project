@@ -1,56 +1,31 @@
 import { Container } from "@mui/system";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { editProduct } from "../services/ProductsServices";
+import { useNavigate } from "react-router-dom";
+import { addProduct } from "../services/ProductsServices";
+import { PFBreadCrumbs } from "../components/PBreadCrumbs";
 
-export default function EditProductsForm({ setProducts }) {
+export default function ProductForm({ setProducts }) {
   const URL = "http://localhost:8080/products";
-
-  const productData = useLocation();
   const navigate = useNavigate();
 
-  const [currentProduct, setCurrentProduct] = useState(
-    productData.state.product[0]
-  );
-
-  function handlePname(e) {
-    setCurrentProduct({ ...currentProduct, productname: e.target.value });
-  }
-  function handlePrice(e) {
-    setCurrentProduct({ ...currentProduct, price: e.target.value });
-  }
-  function handleStock(e) {
-    setCurrentProduct({ ...currentProduct, stock: e.target.value });
-  }
-  function handleColor(e) {
-    setCurrentProduct({ ...currentProduct, color: e.target.value });
-  }
-  function handleCategory(e) {
-    setCurrentProduct({ ...currentProduct, category: e.target.value });
-  }
-  function handleDescription(e) {
-    setCurrentProduct({ ...currentProduct, description: e.target.value });
-  }
-
-  async function handleEdit(e) {
-    editProduct(e, setProducts, URL, currentProduct);
+  async function handleSubmit(e) {
+    addProduct(e, setProducts, URL);
     navigate("/productlist");
   }
 
   return (
     <Container maxWidth="lg" sx={{ margin: "0 auto", paddingBottom: 5 }}>
+      <PFBreadCrumbs />
       <Typography variant="h3" sx={{ marginBottom: 2 }}>
-        EDIT PRODUCT
+        NEW PRODUCT
       </Typography>
-      {currentProduct && (
-        <Box maxWidth="md" sx={{ margin: "0 auto" }}>
+      <Box maxWidth="md" sx={{ margin: "0 auto" }}>
+        <form onSubmit={handleSubmit}>
           <FormControl
             sx={{
               display: "flex",
               flexDirection: "column",
               gap: 2,
-              flexWrap: "wrap",
               justifyContent: "center",
             }}
             fullWidth={true}
@@ -61,8 +36,6 @@ export default function EditProductsForm({ setProducts }) {
               label={"Product name"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.productname}
-              onChange={handlePname}
             />
             <TextField
               name={"price"}
@@ -70,8 +43,6 @@ export default function EditProductsForm({ setProducts }) {
               label={"Price"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.price}
-              onChange={handlePrice}
             />
             <TextField
               name={"stock"}
@@ -79,8 +50,6 @@ export default function EditProductsForm({ setProducts }) {
               label={"Stock"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.stock}
-              onChange={handleStock}
             />
             <TextField
               name={"color"}
@@ -88,8 +57,6 @@ export default function EditProductsForm({ setProducts }) {
               label={"Color"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.color}
-              onChange={handleColor}
             />
             <TextField
               name={"category"}
@@ -97,8 +64,6 @@ export default function EditProductsForm({ setProducts }) {
               label={"Category"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.category}
-              onChange={handleCategory}
             />
             <TextField
               name={"description"}
@@ -106,8 +71,6 @@ export default function EditProductsForm({ setProducts }) {
               label={"Description"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.description}
-              onChange={handleDescription}
             />
           </FormControl>
 
@@ -116,12 +79,11 @@ export default function EditProductsForm({ setProducts }) {
             variant={"contained"}
             sx={{ marginTop: 2 }}
             color={"success"}
-            onClick={handleEdit}
           >
-            SAVE
+            Add
           </Button>
-        </Box>
-      )}
+        </form>
+      </Box>
     </Container>
   );
 }

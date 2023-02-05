@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { addUsers } from "../services/UsersServices";
+import { UFBreadCrumbs } from "../components/UBreadCrumbs";
 
 export default function UserForm({ setUsers }) {
   const URL = "http://localhost:8080/users";
@@ -22,6 +23,7 @@ export default function UserForm({ setUsers }) {
 
   return (
     <Container maxWidth="lg" sx={{ margin: "0 auto", paddingBottom: 5 }}>
+      <UFBreadCrumbs />
       <Typography variant="h3" sx={{ marginBottom: 2 }}>
         ADD USER
       </Typography>

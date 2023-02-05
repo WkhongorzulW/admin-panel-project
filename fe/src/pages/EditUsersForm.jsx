@@ -11,6 +11,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { editUser } from "../services/UsersServices";
+import { UEBreadCrumbs } from "../components/UBreadCrumbs";
 
 export default function EditUsersForm({ users, setUsers }) {
   const URL = "http://localhost:8080/users";
@@ -47,6 +48,7 @@ export default function EditUsersForm({ users, setUsers }) {
 
   return (
     <Container maxWidth="lg" sx={{ margin: "0 auto", paddingBottom: 5 }}>
+      <UEBreadCrumbs />
       <Typography variant="h3" sx={{ marginBottom: 2 }}>
         EDIT USER
       </Typography>
