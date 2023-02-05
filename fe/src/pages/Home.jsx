@@ -9,6 +9,7 @@ import ProductTable from "./ProductTable";
 import UsersTable from "./UsersTable";
 import EditProductsForm from "./EditProductsForm";
 import EditUsersForm from "./EditUsersForm";
+import { textAlign } from "@mui/system";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -29,6 +30,14 @@ export default function Home() {
       <SideBar />
 
       <Routes>
+        <Route
+          path="/"
+          element={
+            <Typography variant="h2" sx={{ margin: "auto" }}>
+              ADMIN PANEL PROJECT
+            </Typography>
+          }
+        />
         <Route
           path="/productlist"
           element={

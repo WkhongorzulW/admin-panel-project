@@ -12,7 +12,9 @@ export function LIdashboard() {
   }
   return (
     <div>
-      <Button onClick={handleClick}>Dashboard</Button>
+      <Link to={"/"}>
+        <Button onClick={handleClick}>Dashboard</Button>
+      </Link>
       {isOpen && (
         <List>
           <MenuItem>

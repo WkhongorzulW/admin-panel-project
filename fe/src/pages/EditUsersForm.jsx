@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { editUser } from "../services/UsersServices";
 import { UEBreadCrumbs } from "../components/UBreadCrumbs";
@@ -122,8 +122,7 @@ export default function EditUsersForm({ users, setUsers }) {
           />
           <TextField
             name={"image"}
-            type={"file"}
-            label={"Upload image"}
+            label={"Image URL"}
             variant={"outlined"}
             fullWidth={true}
           />
@@ -136,7 +135,12 @@ export default function EditUsersForm({ users, setUsers }) {
             fullWidth={true}
           />
         </FormControl>
-
+        <Link to={"/productlist"}>
+          <Button color="info" variant="contained" sx={{ marginTop: 2 }}>
+            BACK
+          </Button>
+        </Link>
+        {"     "}
         <Button
           variant={"contained"}
           type="submit"

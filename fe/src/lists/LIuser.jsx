@@ -13,7 +13,9 @@ export function LIuser() {
   }
   return (
     <div>
-      <Button onClick={handleClick}>User</Button>
+      <Link to={"/"}>
+        <Button onClick={handleClick}>User</Button>
+      </Link>
       {isOpen && (
         <List>
           <Link to={"/userlist"}>

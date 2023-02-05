@@ -83,6 +83,11 @@ export default function UsersTable({ users, setUsers }) {
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
+      <Link to={"/adduser"}>
+        <Button color="info" variant="contained" sx={{ marginTop: 5 }}>
+          BACK
+        </Button>
+      </Link>
     </Container>
   );
 }
