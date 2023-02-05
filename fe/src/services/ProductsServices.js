@@ -5,6 +5,7 @@ async function addProduct(e, setProducts, URL) {
   e.preventDefault();
 
   const postProductData = {
+    image: e.target.image.value,
     productname: e.target.productname.value,
     price: e.target.price.value,
     stock: e.target.stock.value,
@@ -37,6 +38,7 @@ async function editProduct(e, setProducts, URL, currentProduct) {
 
   const putProductData = {
     id: currentProduct.id,
+    image: currentProduct.image,
     productname: currentProduct.productname,
     price: currentProduct.price,
     stock: currentProduct.stock,

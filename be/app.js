@@ -33,6 +33,7 @@ app.post("/products", (request, response) => {
 
   const newProduct = {
     id: Date.now().toString(),
+    image: body.image,
     productname: body.productname,
     price: body.price,
     stock: body.stock,
@@ -121,7 +122,8 @@ app.put("/products", (request, response) => {
 
     const changedData = savedData.map((d) => {
       if (d.id === body.id) {
-        (d.productname = body.productname),
+        (d.image = body.image),
+          (d.productname = body.productname),
           (d.price = body.price),
           (d.stock = body.stock),
           (d.color = body.color),

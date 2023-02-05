@@ -27,7 +27,14 @@ export default function ProductTable({ products, setProducts }) {
 
   const columns = [
     { field: "id", headerName: "ID", width: 130 },
-    { field: "image", headerName: "Image", with: 200 },
+    {
+      field: "image",
+      headerName: "Image",
+      height: 200,
+      renderCell: (params) => {
+        return <img src={params.row.image} style={{ width: "100px" }} />;
+      },
+    },
     { field: "productname", headerName: "Title", with: 130 },
     { field: "description", headerName: "Description", with: 150 },
     { field: "price", headerName: "Price", with: 50 },
@@ -73,13 +80,13 @@ export default function ProductTable({ products, setProducts }) {
       <DataGrid
         rows={products}
         columns={columns}
-        pageSize={5}
+        pageSize={3}
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
 
       <Link to={"/addproduct"}>
-        <Button color="success" variant="contained" sx={{ marginTop: 5 }}>
+        <Button color="info" variant="contained" sx={{ marginTop: 5 }}>
           BACK
         </Button>
       </Link>

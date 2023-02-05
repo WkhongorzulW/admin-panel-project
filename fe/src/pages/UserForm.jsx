@@ -89,14 +89,6 @@ export default function UserForm({ setUsers }) {
               fullWidth={true}
             />
             <TextField
-              name={"image"}
-              type={"file"}
-              label={"Upload image"}
-              variant={"filled"}
-              fullWidth={true}
-            />
-
-            <TextField
               name={"password"}
               type={"password"}
               label={"Password"}

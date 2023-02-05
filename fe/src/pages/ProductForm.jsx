@@ -31,6 +31,12 @@ export default function ProductForm({ setProducts }) {
             fullWidth={true}
           >
             <TextField
+              name={"image"}
+              label={"Image URL"}
+              variant={"filled"}
+              fullWidth={true}
+            />
+            <TextField
               name={"productname"}
               type={"text"}
               label={"Product name"}

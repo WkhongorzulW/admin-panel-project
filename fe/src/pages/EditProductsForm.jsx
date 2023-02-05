@@ -1,6 +1,6 @@
 import { Container } from "@mui/system";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { editProduct } from "../services/ProductsServices";
 import { PEBreadCrumbs } from "../components/PBreadCrumbs";
@@ -33,6 +33,9 @@ export default function EditProductsForm({ setProducts }) {
   function handleDescription(e) {
     setCurrentProduct({ ...currentProduct, description: e.target.value });
   }
+  function handleImage(e) {
+    setCurrentProduct({ ...currentProduct, image: e.target.value });
+  }
 
   async function handleEdit(e) {
     editProduct(e, setProducts, URL, currentProduct);
@@ -57,6 +60,14 @@ export default function EditProductsForm({ setProducts }) {
             }}
             fullWidth={true}
           >
+            <TextField
+              name={"image"}
+              label={"Image URL"}
+              variant={"filled"}
+              fullWidth={true}
+              defaultValue={currentProduct.image}
+              onChange={handleImage}
+            />
             <TextField
               name={"productname"}
               type={"text"}
@@ -112,7 +123,12 @@ export default function EditProductsForm({ setProducts }) {
               onChange={handleDescription}
             />
           </FormControl>
-
+          <Link to={"/productlist"}>
+            <Button color="info" variant="contained" sx={{ marginTop: 2 }}>
+              BACK
+            </Button>
+          </Link>
+          {"   "}
           <Button
             type="submit"
             variant={"contained"}
