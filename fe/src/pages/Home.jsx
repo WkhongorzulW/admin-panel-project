@@ -9,7 +9,6 @@ import ProductTable from "./ProductTable";
 import UsersTable from "./UsersTable";
 import EditProductsForm from "./EditProductsForm";
 import EditUsersForm from "./EditUsersForm";
-import { textAlign } from "@mui/system";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
