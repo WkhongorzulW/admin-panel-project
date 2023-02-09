@@ -45,9 +45,8 @@ export default function ProductTable({ products, setProducts }) {
     {
       field: "image",
       headerName: "Image",
-      height: 200,
       renderCell: (params) => {
-        return <img src={params.row.image} style={{ width: "100px" }} />;
+        return <img src={params.row.image} width="100px" />;
       },
     },
     { field: "productname", headerName: "Title", with: 130 },

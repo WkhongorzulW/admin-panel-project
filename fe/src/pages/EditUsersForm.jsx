@@ -135,7 +135,7 @@ export default function EditUsersForm({ users, setUsers }) {
             fullWidth={true}
           />
         </FormControl>
-        <Link to={"/productlist"}>
+        <Link to={"/userlist"}>
           <Button color="info" variant="contained" sx={{ marginTop: 2 }}>
             BACK
           </Button>
