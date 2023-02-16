@@ -4,16 +4,40 @@ import {
   Button,
   FormControl,
   FormControlLabel,
+  Grid,
+  InputLabel,
+  MenuItem,
   Radio,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { addUsers } from "../services/UsersServices";
 import { UFBreadCrumbs } from "../components/UBreadCrumbs";
+import { useState, useEffect } from "react";
 
 export default function UserForm({ setUsers }) {
   const URL = "http://localhost:8080/users";
+  const ROLE_URL = "http://localhost:8080/role";
+
+  const [roles, setRoles] = useState([]);
+  const [currentRole, setCurrentRole] = useState(0);
+
+  useEffect(() => {
+    fetchRoles();
+  }, []);
+
+  async function fetchRoles() {
+    const FETCHED_DATA = await fetch(ROLE_URL);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setRoles(FETCHED_JSON.data);
+  }
+
+  function handleSelectChange(e) {
+    setCurrentRole(e.target.value);
+  }
+
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -24,7 +48,7 @@ export default function UserForm({ setUsers }) {
   return (
     <Container maxWidth="lg" sx={{ margin: "0 auto", paddingBottom: 5 }}>
       <UFBreadCrumbs />
-      <Typography variant="h3" sx={{ marginBottom: 2 }}>
+      <Typography variant="h3" sx={{ mb: 2, mt: 10 }}>
         ADD USER
       </Typography>
       <Box maxWidth="md" sx={{ margin: "0 auto" }}>
@@ -81,13 +105,24 @@ export default function UserForm({ setUsers }) {
             />
             <FormControlLabel value="male" control={<Radio />} label="Male" />
             <FormControlLabel value="other" control={<Radio />} label="Other" />
-            <TextField
-              name={"role"}
-              type={"text"}
-              label={"Role"}
-              variant={"filled"}
-              fullWidth={true}
-            />
+            <Grid item xs={12}>
+              <InputLabel>User Roles</InputLabel>
+              <Select
+                id="role-selector"
+                value={currentRole}
+                label="Roles"
+                onChange={handleSelectChange}
+              >
+                {roles &&
+                  roles.map((role, index) => {
+                    return (
+                      <MenuItem key={index} value={role.id}>
+                        {role.name}
+                      </MenuItem>
+                    );
+                  })}
+              </Select>
+            </Grid>
             <TextField
               name={"password"}
               type={"password"}

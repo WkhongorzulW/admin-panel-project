@@ -73,7 +73,7 @@ export default function UsersTable({ users, setUsers }) {
   return (
     <Container style={{ height: 400, width: "100%" }}>
       <ULBreadCrumbs />
-      <Typography variant="h3" sx={{ mb: 3 }}>
+      <Typography variant="h3" sx={{ mb: 3, mt: 10 }}>
         Users page
       </Typography>
       <DataGrid

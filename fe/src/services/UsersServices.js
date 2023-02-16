@@ -10,7 +10,7 @@ async function addUsers(e, setUsers, URL) {
     email: e.target.email.value,
     age: e.target.age.value,
     phonenumber: e.target.phonenumber.value,
-    role: e.target.role.value,
+    //role: currentRole,
   };
 
   const FETCHED_DATA = await axios({
@@ -40,7 +40,7 @@ async function editUser(e, setUsers, URL, currentUser) {
     email: currentUser.email,
     age: currentUser.age,
     phonenumber: currentUser.phonenumber,
-    role: currentUser.role,
+    role: currentUser.currentRole,
   };
 
   const FETCHED_DATA = await axios({
