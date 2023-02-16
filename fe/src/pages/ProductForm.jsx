@@ -40,7 +40,7 @@ export default function ProductForm({ setProducts }) {
   return (
     <Container maxWidth="lg" sx={{ margin: "0 auto", paddingBottom: 5 }}>
       <PFBreadCrumbs />
-      <Typography variant="h3" sx={{ marginBottom: 2 }}>
+      <Typography variant="h3" sx={{ marginBottom: 3, marginTop: 10 }}>
         NEW PRODUCT
       </Typography>
       <Box maxWidth="md" sx={{ margin: "0 auto" }}>
