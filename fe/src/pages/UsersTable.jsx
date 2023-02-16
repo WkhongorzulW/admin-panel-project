@@ -10,9 +10,7 @@ import { ULBreadCrumbs } from "../components/UBreadCrumbs";
 import { UserContext } from "../contexts/UserContext";
 
 export default function UsersTable() {
-  const URL = "http://localhost:8080/users";
-
-  const { users, setUsers } = useContext(UserContext);
+  const { users, setUsers, URL } = useContext(UserContext);
 
   useEffect(() => {
     fetchUserData();
@@ -44,6 +42,9 @@ export default function UsersTable() {
       field: "role",
       headerName: "Role",
       with: 120,
+      renderCell: (params) => {
+        return <div>{params.row.role.name}</div>;
+      },
     },
     {
       field: "actions",

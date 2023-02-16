@@ -7,10 +7,9 @@ import React, { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 
 export default function ProductForm() {
-  const URL = "http://localhost:8080/products";
   const navigate = useNavigate();
 
-  const { setProducts } = useContext(ProductContext);
+  const { setProducts, URL } = useContext(ProductContext);
 
   async function handleSubmit(e) {
     addProduct(e, setProducts, URL);

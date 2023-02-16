@@ -1,10 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
+const bcrypt = require("bcrypt");
 
 const app = express();
 
 const PORT = 8080;
+const SALT_ROUNDS = 10;
+
 app.use(cors());
 app.use(express.json());
 
@@ -155,7 +158,7 @@ app.put("/products", (request, response) => {
 /*=======================================================*/
 
 /*-------------- GET /users/ -----------------*/
-app.get("/users", (request, response) => {
+app.get("/users/list", (request, response) => {
   fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
     if (readError) {
       response.json({
@@ -172,19 +175,9 @@ app.get("/users", (request, response) => {
   });
 });
 
-app.post("/users", (request, response) => {
+app.post("/users/list", (request, response) => {
   const body = request.body;
   console.log(body);
-
-  const newUser = {
-    id: Date.now().toString(),
-    firstname: body.firstname,
-    lastname: body.lastname,
-    email: body.email,
-    age: body.age,
-    phonenumber: body.phonenumber,
-    role: body.role,
-  };
 
   fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
     if (readError) {
@@ -196,7 +189,8 @@ app.post("/users", (request, response) => {
 
     const dataObject = JSON.parse(readData);
 
-    fs.readFile("./data/role.json", "utf-8", (readError, readData) => {
+    // ROLE
+    fs.readFile("./public/data/role.json", "utf-8", (readError, readData) => {
       if (readError) {
         response.json({
           status: "file read error",
@@ -206,35 +200,60 @@ app.post("/users", (request, response) => {
 
       const roleData = JSON.parse(readData);
       const roleName = roleData.filter((role) => role.id === body.role)[0];
-      const userData = {
-        ...body,
-        role: roleName,
-      };
 
-      dataObject.push(userData);
+      const userPassword = body.password;
 
-      fs.writeFile(
-        "./public/data/users.json",
-        JSON.stringify(dataObject),
-        (writeError) => {
-          if (writeError) {
+      bcrypt.genSalt(SALT_ROUNDS, (err, salt) => {
+        if (err) {
+          response.json({
+            status: "generating salt error",
+          });
+        }
+        bcrypt.hash(userPassword, salt, (hashError, hashData) => {
+          if (hashError) {
             response.json({
-              status: "error during write file",
+              status: "hashing has error",
               data: [],
             });
           }
-          response.json({
-            status: "success",
-            data: dataObject,
-          });
-        }
-      );
+
+          const newUser = {
+            id: Date.now().toString(),
+            firstname: body.firstname,
+            lastname: body.lastname,
+            email: body.email,
+            age: body.age,
+            phonenumber: body.phonenumber,
+            password: hashData,
+            role: roleName,
+          };
+
+          dataObject.push(newUser);
+
+          fs.writeFile(
+            "./public/data/users.json",
+            JSON.stringify(dataObject),
+            (writeError) => {
+              if (writeError) {
+                response.json({
+                  status: "error during write file",
+                  data: [],
+                });
+              }
+              response.json({
+                status: "success",
+                data: dataObject,
+              });
+            }
+          );
+        });
+      });
     });
   });
 });
 
 /*-------------- DELETE /users/ ------------*/
-app.delete("/users", (request, response) => {
+app.delete("/users/list", (request, response) => {
   const body = request.body;
 
   fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
@@ -268,7 +287,7 @@ app.delete("/users", (request, response) => {
 });
 
 /*--------------- PUT /users/ ------------*/
-app.put("/users", (request, response) => {
+app.put("/users/list", (request, response) => {
   const body = request.body;
 
   fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {

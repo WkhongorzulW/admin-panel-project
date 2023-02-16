@@ -7,9 +7,7 @@ import { PEBreadCrumbs } from "../components/PBreadCrumbs";
 import { ProductContext } from "../contexts/ProductContext";
 
 export default function EditProductsForm() {
-  const URL = "http://localhost:8080/products";
-
-  const { setProducts } = useContext(ProductContext);
+  const { setProducts, URL } = useContext(ProductContext);
 
   const productData = useLocation();
   const navigate = useNavigate();

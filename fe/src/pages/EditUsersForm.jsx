@@ -15,9 +15,7 @@ import { UEBreadCrumbs } from "../components/UBreadCrumbs";
 import { UserContext } from "../contexts/UserContext";
 
 export default function EditUsersForm() {
-  const URL = "http://localhost:8080/users";
-
-  const { setUsers } = useContext(UserContext);
+  const { setUsers, URL } = useContext(UserContext);
 
   const navigate = useNavigate();
   const userData = useLocation();

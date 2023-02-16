@@ -4,8 +4,10 @@ const ProductContext = createContext(null);
 
 const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const URL = "http://localhost:8080/products";
+
   return (
-    <ProductContext.Provider value={{ products, setProducts }}>
+    <ProductContext.Provider value={{ products, setProducts, URL }}>
       {children}
     </ProductContext.Provider>
   );

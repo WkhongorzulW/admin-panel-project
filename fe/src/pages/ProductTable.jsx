@@ -11,9 +11,7 @@ import React from "react";
 import { ProductContext } from "../contexts/ProductContext";
 
 export default function ProductTable() {
-  const URL = "http://localhost:8080/products";
-
-  const { products, setProducts } = useContext(ProductContext);
+  const { products, setProducts, URL } = useContext(ProductContext);
 
   useEffect(() => {
     fetchProductData();
