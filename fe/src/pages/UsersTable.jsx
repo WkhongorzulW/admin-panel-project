@@ -1,15 +1,16 @@
 import { Button, Container, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { deleteUser } from "../services/UsersServices";
 import { ULBreadCrumbs } from "../components/UBreadCrumbs";
+import { UserContext } from "../contexts/UserContext";
 
-export default function UsersTable({ users, setUsers }) {
-  const URL = "http://localhost:8080/users";
+export default function UsersTable() {
+  const { users, setUsers, URL } = useContext(UserContext);
 
   useEffect(() => {
     fetchUserData();
@@ -41,6 +42,9 @@ export default function UsersTable({ users, setUsers }) {
       field: "role",
       headerName: "Role",
       with: 120,
+      renderCell: (params) => {
+        return <div>{params.row.role.name}</div>;
+      },
     },
     {
       field: "actions",

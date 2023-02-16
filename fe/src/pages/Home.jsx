@@ -1,18 +1,17 @@
 import * as React from "react";
+import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
 import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 import SideBar from "../components/SideBar";
 import ProductForm from "./ProductForm";
 import UserForm from "./UserForm";
-import { useState } from "react";
 import ProductTable from "./ProductTable";
 import UsersTable from "./UsersTable";
 import EditProductsForm from "./EditProductsForm";
 import EditUsersForm from "./EditUsersForm";
+import LoginForm from "./LoginForm";
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
-  const [users, setUsers] = useState([]);
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar
@@ -37,37 +36,16 @@ export default function Home() {
             </Typography>
           }
         />
-        <Route
-          path="/productlist"
-          element={
-            <ProductTable products={products} setProducts={setProducts} />
-          }
-        />
-        <Route
-          path="/addproduct"
-          element={
-            <ProductForm products={products} setProducts={setProducts} />
-          }
-        />
-        <Route
-          path="/editproduct/:id"
-          element={
-            <EditProductsForm products={products} setProducts={setProducts} />
-          }
-        />
-        <Route
-          path="/userlist"
-          element={<UsersTable users={users} setUsers={setUsers} />}
-        />
-        <Route
-          path="/adduser"
-          element={<UserForm users={users} setUsers={setUsers} />}
-        />
-        <Route
-          path={"/edituser/:id"}
-          element={<EditUsersForm users={users} setUsers={setUsers} />}
-        />
+        <Route path="/productlist" element={<ProductTable />} />
+        <Route path="/addproduct" element={<ProductForm />} />
+        <Route path="/editproduct/:id" element={<EditProductsForm />} />
+        <Route path="/userlist" element={<UsersTable />} />
+        <Route path="/adduser" element={<UserForm />} />
+        <Route path={"/edituser/:id"} element={<EditUsersForm />} />
+        <Route path="/user/login" element={<LoginForm />} />
       </Routes>
+
+      <ToastContainer />
     </Box>
   );
 }

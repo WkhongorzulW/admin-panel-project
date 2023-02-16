@@ -1,7 +1,7 @@
 import axios from "axios";
 
 /*------------- POST -------------*/
-async function addUsers(e, setUsers, URL) {
+async function addUsers(e, setUsers, URL, currentRole) {
   e.preventDefault();
 
   const postUserData = {
@@ -10,7 +10,8 @@ async function addUsers(e, setUsers, URL) {
     email: e.target.email.value,
     age: e.target.age.value,
     phonenumber: e.target.phonenumber.value,
-    //role: currentRole,
+    password: e.target.password.value,
+    role: currentRole,
   };
 
   const FETCHED_DATA = await axios({

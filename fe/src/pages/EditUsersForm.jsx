@@ -9,12 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { editUser } from "../services/UsersServices";
 import { UEBreadCrumbs } from "../components/UBreadCrumbs";
+import { UserContext } from "../contexts/UserContext";
 
-export default function EditUsersForm({ users, setUsers }) {
-  const URL = "http://localhost:8080/users";
+export default function EditUsersForm() {
+  const { setUsers, URL } = useContext(UserContext);
 
   const navigate = useNavigate();
   const userData = useLocation();
