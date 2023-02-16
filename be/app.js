@@ -195,24 +195,41 @@ app.post("/users", (request, response) => {
     }
 
     const dataObject = JSON.parse(readData);
-    dataObject.push(newUser);
 
-    fs.writeFile(
-      "./public/data/users.json",
-      JSON.stringify(dataObject),
-      (writeError) => {
-        if (writeError) {
-          response.json({
-            status: "error during write file",
-            data: [],
-          });
-        }
+    fs.readFile("./data/role.json", "utf-8", (readError, readData) => {
+      if (readError) {
         response.json({
-          status: "success",
-          data: dataObject,
+          status: "file read error",
+          data: [],
         });
       }
-    );
+
+      const roleData = JSON.parse(readData);
+      const roleName = roleData.filter((role) => role.id === body.role)[0];
+      const userData = {
+        ...body,
+        role: roleName,
+      };
+
+      dataObject.push(userData);
+
+      fs.writeFile(
+        "./public/data/users.json",
+        JSON.stringify(dataObject),
+        (writeError) => {
+          if (writeError) {
+            response.json({
+              status: "error during write file",
+              data: [],
+            });
+          }
+          response.json({
+            status: "success",
+            data: dataObject,
+          });
+        }
+      );
+    });
   });
 });
 
@@ -292,6 +309,26 @@ app.put("/users", (request, response) => {
         });
       }
     );
+  });
+});
+
+/// API get all user roles
+
+app.get("/users/roles", (request, response) => {
+  fs.readFile("./data/role.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file does not exist",
+        data: [],
+      });
+    }
+
+    const dataObject = JSON.parse(readData);
+
+    response.json({
+      status: "success",
+      data: dataObject,
+    });
   });
 });
 
