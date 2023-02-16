@@ -45,7 +45,7 @@ export default function EditProductsForm({ setProducts }) {
   return (
     <Container maxWidth="lg" sx={{ margin: "0 auto", paddingBottom: 5 }}>
       <PEBreadCrumbs />
-      <Typography variant="h3" sx={{ marginBottom: 2 }}>
+      <Typography variant="h3" sx={{ marginBottom: 3, marginTop: 10 }}>
         EDIT PRODUCT
       </Typography>
       {currentProduct && (

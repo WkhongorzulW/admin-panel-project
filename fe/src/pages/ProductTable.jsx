@@ -88,7 +88,7 @@ export default function ProductTable({ products, setProducts }) {
   return (
     <Container style={{ height: 400, width: "100%" }}>
       <PLBreadCrumbs />
-      <Typography variant="h3" marginBottom={3}>
+      <Typography variant="h3" sx={{ marginBottom: 3, marginTop: 10 }}>
         Products
       </Typography>
       <DataGrid
