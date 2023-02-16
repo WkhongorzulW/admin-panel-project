@@ -45,7 +45,7 @@ export default function Home() {
         <Route path="/user/login" element={<LoginForm />} />
       </Routes>
 
-      {/* <ToastContainer /> */}
+      <ToastContainer />
     </Box>
   );
 }
