@@ -1,40 +1,20 @@
 import { Container } from "@mui/system";
-import {
-  Box,
-  Button,
-  FormControl,
-  Snackbar,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { addProduct } from "../services/ProductsServices";
 import { PFBreadCrumbs } from "../components/PBreadCrumbs";
-import MuiAlert from "@mui/material/Alert";
-import React from "react";
-import { useState } from "react";
+import React, { useContext } from "react";
+import { ProductContext } from "../contexts/ProductContext";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
-export default function ProductForm({ setProducts }) {
+export default function ProductForm() {
   const URL = "http://localhost:8080/products";
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const [check, setCheck] = useState("No");
 
-  function handleClose(event, reason) {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  }
+  const { setProducts } = useContext(ProductContext);
 
   async function handleSubmit(e) {
     addProduct(e, setProducts, URL);
     navigate("/productlist");
-    setOpen(true);
   }
 
   return (
@@ -114,11 +94,6 @@ export default function ProductForm({ setProducts }) {
           </Button>
         </form>
       </Box>
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert severity="success" sx={{ width: "100%" }}>
-          Added !
-        </Alert>
-      </Snackbar>
     </Container>
   );
 }

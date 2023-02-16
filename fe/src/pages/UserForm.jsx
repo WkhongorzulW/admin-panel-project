@@ -15,14 +15,15 @@ import {
 import { useNavigate } from "react-router-dom";
 import { addUsers } from "../services/UsersServices";
 import { UFBreadCrumbs } from "../components/UBreadCrumbs";
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 export default function UserForm({ setUsers }) {
   const URL = "http://localhost:8080/users";
-  const ROLE_URL = "http://localhost:8080/role";
+  const ROLE_URL = "http://localhost:8080/users/roles";
 
-  const [roles, setRoles] = useState([]);
-  const [currentRole, setCurrentRole] = useState(0);
+  const { roles, setRoles, currentRole, setCurrentRole } =
+    useContext(UserContext);
 
   useEffect(() => {
     fetchRoles();

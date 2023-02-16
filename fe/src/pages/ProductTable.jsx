@@ -1,5 +1,5 @@
-import { Button, Container, Snackbar, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { Button, Container, Typography } from "@mui/material";
+import { useContext, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
@@ -7,24 +7,13 @@ import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { deleteProduct } from "../services/ProductsServices";
 import { PLBreadCrumbs } from "../components/PBreadCrumbs";
-import MuiAlert from "@mui/material/Alert";
 import React from "react";
-import { useState } from "react";
+import { ProductContext } from "../contexts/ProductContext";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
-export default function ProductTable({ products, setProducts }) {
+export default function ProductTable() {
   const URL = "http://localhost:8080/products";
-  const [open, setOpen] = useState(false);
 
-  function handleClose(event, reason) {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  }
+  const { products, setProducts } = useContext(ProductContext);
 
   useEffect(() => {
     fetchProductData();
@@ -104,11 +93,6 @@ export default function ProductTable({ products, setProducts }) {
           BACK
         </Button>
       </Link>
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert severity="success" sx={{ width: "100%" }}>
-          Deleted !
-        </Alert>
-      </Snackbar>
     </Container>
   );
 }

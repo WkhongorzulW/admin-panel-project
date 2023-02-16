@@ -315,7 +315,7 @@ app.put("/users", (request, response) => {
 /// API get all user roles
 
 app.get("/users/roles", (request, response) => {
-  fs.readFile("./data/role.json", "utf-8", (readError, readData) => {
+  fs.readFile("./public/data/role.json", "utf-8", (readError, readData) => {
     if (readError) {
       response.json({
         status: "file does not exist",

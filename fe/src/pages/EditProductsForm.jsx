@@ -1,12 +1,15 @@
 import { Container } from "@mui/system";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { editProduct } from "../services/ProductsServices";
 import { PEBreadCrumbs } from "../components/PBreadCrumbs";
+import { ProductContext } from "../contexts/ProductContext";
 
-export default function EditProductsForm({ setProducts }) {
+export default function EditProductsForm() {
   const URL = "http://localhost:8080/products";
+
+  const { setProducts } = useContext(ProductContext);
 
   const productData = useLocation();
   const navigate = useNavigate();

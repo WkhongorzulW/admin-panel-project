@@ -24,6 +24,9 @@ export function LIuser() {
           <Link to={"/adduser"}>
             <ListItemText primary={"Add user"} />
           </Link>
+          <Link to={"/user/login"}>
+            <ListItemText primary="Login" />
+          </Link>
         </List>
       )}
     </div>
