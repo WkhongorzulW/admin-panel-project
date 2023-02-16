@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
 import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 import SideBar from "../components/SideBar";
@@ -43,6 +44,8 @@ export default function Home() {
         <Route path={"/edituser/:id"} element={<EditUsersForm />} />
         <Route path="/user/login" element={<LoginForm />} />
       </Routes>
+
+      {/* <ToastContainer /> */}
     </Box>
   );
 }

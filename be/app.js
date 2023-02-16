@@ -331,6 +331,65 @@ app.put("/users/list", (request, response) => {
   });
 });
 
+/*------------ POST /user login/ ------------*/
+app.post("/login", (request, response) => {
+  const body = request.body;
+
+  fs.readFile("./public/data/users.json", "utf-8", (readError, readData) => {
+    if (readError) {
+      response.json({
+        status: "file not found",
+        data: [],
+      });
+    }
+
+    const usersArrayObject = JSON.parse(readData);
+
+    const foundUser = usersArrayObject.filter(
+      (user) => body.email === user.email
+    );
+
+    if (foundUser.length === 0) {
+      response.json({
+        status: "user not found",
+        data: [],
+      });
+    } else {
+      const foundUserObj = foundUser[0];
+      const plainPassword = body.password;
+      const savedPassword = foundUserObj.password;
+
+      bcrypt.compare(
+        plainPassword,
+        savedPassword,
+        (compareError, compareResult) => {
+          if (compareError) {
+            response.json({
+              status: "Username or password do not match",
+            });
+          }
+
+          if (compareResult) {
+            response.json({
+              status: "success",
+              data: {
+                email: foundUserObj.email,
+                firstname: foundUserObj.firstname,
+                lastname: foundUserObj.lastname,
+              },
+            });
+          } else {
+            response.json({
+              status: "Username or password do not match",
+              data: [],
+            });
+          }
+        }
+      );
+    }
+  });
+});
+
 /// API get all user roles
 
 app.get("/users/roles", (request, response) => {
