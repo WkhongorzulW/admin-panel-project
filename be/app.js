@@ -1,7 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const fs = require("fs");
-const bcrypt = require("bcrypt");
+import express from "express";
+import cors from "cors";
+import fs from "fs";
+import bcrypt from "bcrypt";
+import role_router from "./routes/UserRole.js";
 
 const app = express();
 
@@ -10,6 +11,7 @@ const SALT_ROUNDS = 10;
 
 app.use(cors());
 app.use(express.json());
+app.use(role_router);
 
 /*--------------- GET /product/ --------------*/
 app.get("/products", (request, response) => {

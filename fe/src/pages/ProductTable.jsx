@@ -36,11 +36,11 @@ export default function ProductTable() {
         return <img src={params.row.image} width="100px" />;
       },
     },
-    { field: "productname", headerName: "Title", with: 130 },
-    { field: "description", headerName: "Description", with: 150 },
-    { field: "price", headerName: "Price", with: 50 },
-    { field: "stock", headerName: "Stock", with: 80 },
-    { field: "color", headerName: "Color", with: 80 },
+    { field: "productname", headerName: "Title", width: 130 },
+    { field: "description", headerName: "Description", width: 150 },
+    { field: "price", headerName: "Price", width: 50 },
+    { field: "stock", headerName: "Stock", width: 80 },
+    { field: "color", headerName: "Color", width: 80 },
     { field: "category", headerName: "Category", width: 90 },
     {
       field: "actions",
@@ -83,7 +83,6 @@ export default function ProductTable() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
       />
 
       <Link to={"/addproduct"}>
