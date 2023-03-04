@@ -6,9 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useContext } from "react";
 import { toast } from "react-toastify";
-import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {

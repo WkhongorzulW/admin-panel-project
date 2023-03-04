@@ -13,10 +13,10 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { addUsers } from "../services/UsersServices";
-import { UFBreadCrumbs } from "../components/UBreadCrumbs";
+import { addUsers } from "../../services/UsersServices";
+import { UFBreadCrumbs } from "../../components/UBreadCrumbs";
 import { useEffect, useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function UserForm() {
   const {

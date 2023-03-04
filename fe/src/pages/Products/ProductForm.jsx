@@ -1,10 +1,10 @@
 import { Container } from "@mui/system";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { addProduct } from "../services/ProductsServices";
-import { PFBreadCrumbs } from "../components/PBreadCrumbs";
+import { addProduct } from "../../services/ProductsServices";
+import { PFBreadCrumbs } from "../../components/PBreadCrumbs";
 import React, { useContext } from "react";
-import { ProductContext } from "../contexts/ProductContext";
+import { ProductContext } from "../../contexts/ProductContext";
 
 export default function ProductForm() {
   const navigate = useNavigate();

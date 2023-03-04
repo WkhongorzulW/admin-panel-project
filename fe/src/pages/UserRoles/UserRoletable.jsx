@@ -1,11 +1,12 @@
 import { Button, Container, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
-import { UserRoleContext } from "../contexts/UserRoleContext";
+import { UserRoleContext } from "../../contexts/UserRoleContext";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
+import { deleteRole } from "../../services/RoleServices";
 
 export default function UserRoleTable() {
   const [userRoles, setUserRoles, URL] = useContext(UserRoleContext);
@@ -20,6 +21,10 @@ export default function UserRoleTable() {
     setUserRoles(FETCHED_JSON);
   }
 
+  async function handleDelete(roleName) {
+    deleteRole(setUserRoles, roleName, URL);
+  }
+
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
     { field: "user_role_name", headerName: "Role name", width: 150 },
@@ -30,12 +35,25 @@ export default function UserRoleTable() {
       renderCell: (params) => {
         return (
           <Box>
-            <Link to={`/editproduct/${params.row.id}`}>
-              <Button color={"info"} variant={"outlined"}>
+            <Link
+              to={`/user/role/edit/${params.row.id}`}
+              state={{
+                role: userRoles.filter((r) => r.roleId === params.row.id),
+              }}
+            >
+              <Button
+                color={"info"}
+                variant={"outlined"}
+                onClick={handleDelete(params.row.id)}
+              >
                 <AutoFixHighOutlinedIcon />
               </Button>
             </Link>{" "}
-            <Button color={"error"} variant={"contained"}>
+            <Button
+              color={"error"}
+              variant={"contained"}
+              onClick={handleDelete}
+            >
               <DeleteOutlineIcon />
             </Button>
           </Box>

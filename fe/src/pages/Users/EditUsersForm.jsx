@@ -10,9 +10,9 @@ import {
 } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { editUser } from "../services/UsersServices";
-import { UEBreadCrumbs } from "../components/UBreadCrumbs";
-import { UserContext } from "../contexts/UserContext";
+import { editUser } from "../../services/UsersServices";
+import { UEBreadCrumbs } from "../../components/UBreadCrumbs";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function EditUsersForm() {
   const { setUsers, URL } = useContext(UserContext);

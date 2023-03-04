@@ -2,9 +2,9 @@ import { Container } from "@mui/system";
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { editProduct } from "../services/ProductsServices";
-import { PEBreadCrumbs } from "../components/PBreadCrumbs";
-import { ProductContext } from "../contexts/ProductContext";
+import { editProduct } from "../../services/ProductsServices";
+import { PEBreadCrumbs } from "../../components/PBreadCrumbs";
+import { ProductContext } from "../../contexts/ProductContext";
 
 export default function EditProductsForm() {
   const { setProducts, URL } = useContext(ProductContext);

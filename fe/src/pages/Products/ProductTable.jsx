@@ -5,10 +5,10 @@ import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { deleteProduct } from "../services/ProductsServices";
-import { PLBreadCrumbs } from "../components/PBreadCrumbs";
+import { deleteProduct } from "../../services/ProductsServices";
+import { PLBreadCrumbs } from "../../components/PBreadCrumbs";
 import React from "react";
-import { ProductContext } from "../contexts/ProductContext";
+import { ProductContext } from "../../contexts/ProductContext";
 
 export default function ProductTable() {
   const { products, setProducts, URL } = useContext(ProductContext);
