@@ -5,9 +5,9 @@ import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { deleteUser } from "../services/UsersServices";
-import { ULBreadCrumbs } from "../components/UBreadCrumbs";
-import { UserContext } from "../contexts/UserContext";
+import { deleteUser } from "../../services/UsersServices";
+import { ULBreadCrumbs } from "../../components/UBreadCrumbs";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function UsersTable() {
   const { users, setUsers, URL } = useContext(UserContext);

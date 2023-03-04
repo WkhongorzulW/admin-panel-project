@@ -3,15 +3,16 @@ import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
 import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 import SideBar from "../components/SideBar";
-import ProductForm from "./ProductForm";
-import UserForm from "./UserForm";
-import ProductTable from "./ProductTable";
-import UsersTable from "./UsersTable";
-import EditProductsForm from "./EditProductsForm";
-import EditUsersForm from "./EditUsersForm";
+import ProductForm from "./Products/ProductForm";
+import UserForm from "./Users/UserForm";
+import ProductTable from "./Products/ProductTable";
+import UsersTable from "./Users/UsersTable";
+import EditProductsForm from "./Products/EditProductsForm";
+import EditUsersForm from "./Users/EditUsersForm";
 import LoginForm from "./LoginForm";
-import UserRoleForm from "./UserRoleForm";
-import UserRoleTable from "./UserRoletable";
+import UserRoleForm from "./UserRoles/UserRoleForm";
+import UserRoleTable from "./UserRoles/UserRoletable";
+import EditUserRoleForm from "./UserRoles/EditUserRoleForm";
 
 export default function Home() {
   return (
@@ -47,6 +48,7 @@ export default function Home() {
         <Route path="/user/login" element={<LoginForm />} />
         <Route path="/user/role/add" element={<UserRoleForm />} />
         <Route path="/user/role/list" element={<UserRoleTable />} />
+        <Route path="/user/role/edit/:id" element={<EditUserRoleForm />} />
       </Routes>
 
       <ToastContainer />
