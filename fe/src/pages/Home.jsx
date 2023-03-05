@@ -13,6 +13,8 @@ import LoginForm from "./LoginForm";
 import UserRoleForm from "./UserRoles/UserRoleForm";
 import UserRoleTable from "./UserRoles/UserRoletable";
 import EditUserRoleForm from "./UserRoles/EditUserRoleForm";
+import CategoryForm from "./ProductCategories/CategoryForm";
+import CategoriesTable from "./ProductCategories/CategoryTable";
 
 export default function Home() {
   return (
@@ -49,6 +51,8 @@ export default function Home() {
         <Route path="/user/role/add" element={<UserRoleForm />} />
         <Route path="/user/role/list" element={<UserRoleTable />} />
         <Route path="/user/role/edit/:id" element={<EditUserRoleForm />} />
+        <Route path="/product/category/add" element={<CategoryForm />} />
+        <Route path="/product/category/list" element={<CategoriesTable />} />
       </Routes>
 
       <ToastContainer />
