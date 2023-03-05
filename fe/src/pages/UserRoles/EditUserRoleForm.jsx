@@ -12,19 +12,17 @@ export default function EditUserRoleForm() {
 
   const [currentRole, setCurrentRole] = useState(userRoleData.state.role[0]);
 
-  console.log(userRoleData.state);
-
   function handleRoleName(e) {
-    setCurrentRole({ ...currentRole, roleName: e.target.roleName.value });
+    setCurrentRole({ ...currentRole, user_role_name: e.target.value });
   }
 
-  async function handleEdit(e) {
-    editRoleName(e, setUserRoles, URL, currentRole);
+  async function handleEdit() {
+    editRoleName(setUserRoles, URL, currentRole);
     navigate("/user/role/list");
   }
 
   return (
-    <Container maxWidth="lg" sx={{ margin: "0 auto", paddingBottom: 5 }}>
+    <Container>
       <Typography variant="h3" sx={{ marginBottom: 3, marginTop: 10 }}>
         EDIT USER ROLE
       </Typography>
@@ -43,18 +41,24 @@ export default function EditUserRoleForm() {
               name="roleName"
               label="Role name"
               variant="filled"
-              defaultValue={currentRole.roleName}
+              defaultValue={currentRole.user_role_name}
               onChange={handleRoleName}
             />
             <TextField
               name="roleId"
               label="Role id"
               variant="filled"
-              defaultValue={currentRole.roleId}
+              defaultValue={currentRole.id}
             />
           </FormControl>
           <Link to={"/user/role/list"}>
-            <Button>BACK</Button>
+            <Button
+              variant="contained"
+              sx={{ marginTop: 2, marginRight: 3 }}
+              color="info"
+            >
+              BACK
+            </Button>
           </Link>
           <Button
             type="submit"
@@ -62,7 +66,9 @@ export default function EditUserRoleForm() {
             sx={{ marginTop: 2 }}
             color="success"
             onClick={handleEdit}
-          ></Button>
+          >
+            SAVE
+          </Button>
         </Box>
       )}
     </Container>

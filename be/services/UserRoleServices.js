@@ -16,6 +16,7 @@ export async function addRoles(roleName) {
 
 export async function updateRoles(roleId, roleName) {
   const query = `update user_role set user_role_name='${roleName}' where user_role_id=${roleId}`;
+  console.log(query);
   const [rows] = await pool.query(query);
   return rows;
 }

@@ -3,6 +3,7 @@ import { ProductContextProvider } from "./contexts/ProductContext";
 import { UserContextProvider } from "./contexts/UserContext";
 import Home from "./pages/Home";
 import { UserRoleContextProvider } from "./contexts/UserRoleContext";
+import { CategoryContextProvider } from "./contexts/CategoryContext";
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
       <ProductContextProvider>
         <UserContextProvider>
           <UserRoleContextProvider>
-            <Home />
+            <CategoryContextProvider>
+              <Home />
+            </CategoryContextProvider>
           </UserRoleContextProvider>
         </UserContextProvider>
       </ProductContextProvider>

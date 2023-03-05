@@ -28,16 +28,15 @@ export async function deleteRole(setUserRoles, roleName, URL) {
 }
 
 /*------------- EDIT --------------*/
-export async function editRoleName(e, setUserRoles, URL, currentRole) {
-  const putRoleName = {
-    roleId: currentRole.roleId,
-    roleName: currentRole.roleName,
-  };
-
+export async function editRoleName(setUserRoles, URL, currentRole) {
   const FETCHED_DATA = await axios({
     url: URL,
     method: "PUT",
-    data: putRoleName,
+    data: {
+      roleId: currentRole.id,
+      roleName: currentRole.user_role_name,
+    },
   });
+  console.log(currentRole);
   setUserRoles(FETCHED_DATA.data);
 }

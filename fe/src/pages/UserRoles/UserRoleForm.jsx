@@ -6,7 +6,7 @@ import { UserRoleContext } from "../../contexts/UserRoleContext";
 import { useNavigate } from "react-router-dom";
 
 export default function UserRoleForm() {
-  const [userRoles, setUserRoles, URL] = useContext(UserRoleContext);
+  const [setUserRoles, URL] = useContext(UserRoleContext);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -19,7 +19,7 @@ export default function UserRoleForm() {
       <Typography variant="h3" sx={{ mb: 2, mt: 10 }}>
         ADD ROLE
       </Typography>
-      <Box maxWidth="md" sx={{ margin: "0, auto" }}>
+      <Box maxWidth="md" sx={{ margin: "0 auto" }}>
         <form onSubmit={handleSubmit}>
           <FormControl sx={{ margin: "0 auto" }}>
             <TextField

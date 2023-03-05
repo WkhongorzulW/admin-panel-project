@@ -1,33 +1,28 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import { useContext, useEffect } from "react";
-import { UserRoleContext } from "../../contexts/UserRoleContext";
+import { Link } from "react-router-dom";
+import { CategoryContext } from "../../contexts/CategoryContext";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { Box } from "@mui/system";
-import { Link } from "react-router-dom";
-import { DataGrid } from "@mui/x-data-grid";
-import { deleteRole } from "../../services/RoleServices";
 
-export default function UserRoleTable() {
-  const [userRoles, setUserRoles, URL] = useContext(UserRoleContext);
+export default function CategoriesTable() {
+  const [caterories, setCategories, URL] = useContext(CategoryContext);
 
   useEffect(() => {
-    fetchUserRoles();
+    fetchCategories();
   }, []);
 
-  async function fetchUserRoles() {
+  async function fetchCategories() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUserRoles(FETCHED_JSON);
-  }
-
-  async function handleDelete(roleName) {
-    deleteRole(setUserRoles, roleName, URL);
+    setCategories(FETCHED_JSON);
   }
 
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
-    { field: "user_role_name", headerName: "Role name", width: 150 },
+    { field: "product_category_name", headerName: "Role name", width: 150 },
+    { field: "product_category_description", headerName: "Description" },
     {
       field: "actions",
       headerName: "Actions",
@@ -36,9 +31,9 @@ export default function UserRoleTable() {
         return (
           <Box>
             <Link
-              to={`/user/role/edit/${params.row.id}`}
+              to={`/product/category/edit/${params.row.id}`}
               state={{
-                role: userRoles.filter((r) => r.id === params.row.id),
+                role: caterories.filter((r) => r.id === params.row.id),
               }}
             >
               <Button color={"info"} variant={"outlined"}>
@@ -48,7 +43,7 @@ export default function UserRoleTable() {
             <Button
               color={"error"}
               variant={"contained"}
-              onClick={() => handleDelete(params.row.user_role_name)}
+              //   onClick={() => handleDelete(params.row.product_category_name)}
             >
               <DeleteOutlineIcon />
             </Button>
@@ -61,15 +56,15 @@ export default function UserRoleTable() {
   return (
     <Container style={{ height: 400, width: "50%" }}>
       <Typography variant="h3" sx={{ marginBottom: 3, marginTop: 10 }}>
-        User Roles
+        PRODUCT CATEGORIES
       </Typography>
       <DataGrid
-        rows={userRoles}
+        rows={caterories}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
       />
-      <Link to="/user/role/add">
+      <Link to="/product/category/add">
         <Button variant="contained" color="info" sx={{ marginTop: 2 }}>
           BACK
         </Button>
