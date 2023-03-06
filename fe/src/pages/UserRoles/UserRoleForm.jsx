@@ -6,11 +6,11 @@ import { UserRoleContext } from "../../contexts/UserRoleContext";
 import { useNavigate } from "react-router-dom";
 
 export default function UserRoleForm() {
-  const [setUserRoles, URL] = useContext(UserRoleContext);
+  const [userRoles, setUserRoles, URL] = useContext(UserRoleContext);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    addRole(e, setUserRoles, URL);
+    addRole(e, userRoles, setUserRoles, URL);
     navigate("/user/role/list");
   }
 

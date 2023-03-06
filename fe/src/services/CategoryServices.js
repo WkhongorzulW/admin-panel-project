@@ -14,6 +14,16 @@ export async function addCategory(e, setCategories, URL) {
       categoryDescription: e.target.categoryDescription.value,
     },
   });
-  console.log(FETCHED_DATA);
-  setCategories(FETCHED_DATA.data);
+  setCategories(FETCHED_DATA);
+}
+
+/*------------ DELETE -------------*/
+export async function deleteCategory(e, setCategories, URL){
+  const FETCHED_DATA = await axios({
+    url: URL,
+    method: "DELETE",
+    data: {
+      
+    }
+  })
 }
