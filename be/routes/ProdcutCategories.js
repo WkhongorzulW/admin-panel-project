@@ -1,6 +1,8 @@
 import express from "express";
 import {
   addCategories,
+  deleteCategories,
+  editCategories,
   getCategories,
 } from "../services/ProductCategoryServices.js";
 
@@ -13,9 +15,29 @@ category_router.get("/categories", async (request, response) => {
 });
 
 category_router.post("/categories", async (request, response) => {
-  console.log(request.body);
   const { categoryName, categoryDescription } = request.body;
   const result = await addCategories(categoryName, categoryDescription);
+
+  response.status(200).send(result);
+});
+
+category_router.put("/categories", async (request, response) => {
+  const { categoryId, categoryName, categoryDescription } = request.body;
+
+  const result = await editCategories(
+    categoryId,
+    categoryName,
+    categoryDescription
+  );
+
+  response.status(200).send(result);
+});
+
+category_router.delete("/categories", async (request, response) => {
+  const body = request.body;
+
+  const result = await deleteCategories(body.categoryId);
+  console.log(result);
 
   response.status(200).send(result);
 });

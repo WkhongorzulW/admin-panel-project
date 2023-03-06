@@ -15,6 +15,7 @@ import UserRoleTable from "./UserRoles/UserRoletable";
 import EditUserRoleForm from "./UserRoles/EditUserRoleForm";
 import CategoryForm from "./ProductCategories/CategoryForm";
 import CategoriesTable from "./ProductCategories/CategoryTable";
+import EditCategoryForm from "./ProductCategories/CategoryEditForm";
 
 export default function Home() {
   return (
@@ -53,6 +54,10 @@ export default function Home() {
         <Route path="/user/role/edit/:id" element={<EditUserRoleForm />} />
         <Route path="/product/category/add" element={<CategoryForm />} />
         <Route path="/product/category/list" element={<CategoriesTable />} />
+        <Route
+          path="/product/category/edit/:id"
+          element={<EditCategoryForm />}
+        />
       </Routes>
 
       <ToastContainer />

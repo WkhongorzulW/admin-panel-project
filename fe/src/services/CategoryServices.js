@@ -1,10 +1,8 @@
 import axios from "axios";
 
 /*------------- POST ------------*/
-export async function addCategory(e, setCategories, URL) {
+export async function addCategory(e, categories, setCategories, URL) {
   e.preventDefault();
-  console.log(e.target.categoryName.value);
-  console.log(e.target.categoryDescription.value);
 
   const FETCHED_DATA = await axios({
     url: URL,
@@ -15,15 +13,44 @@ export async function addCategory(e, setCategories, URL) {
     },
   });
   setCategories(FETCHED_DATA);
+  console.log(categories);
+}
+
+/*-------------- EDIT --------------*/
+export async function editCategory(
+  categories,
+  setCategories,
+  URL,
+  currentCategory
+) {
+  const FETCHED_DATA = await axios({
+    url: URL,
+    method: "PUT",
+    data: {
+      categoryId: currentCategory.id,
+      categoryName: currentCategory.product_category_name,
+      categoryDescription: currentCategory.product_category_description,
+    },
+  });
+  setCategories(FETCHED_DATA);
+  console.log(categories);
 }
 
 /*------------ DELETE -------------*/
-export async function deleteCategory(e, setCategories, URL){
+export async function deleteCategory(
+  categoryId,
+  categories,
+  setCategories,
+  URL
+) {
+  console.log(categoryId);
   const FETCHED_DATA = await axios({
     url: URL,
     method: "DELETE",
     data: {
-      
-    }
-  })
+      categoryId: categoryId,
+    },
+  });
+  setCategories(FETCHED_DATA);
+  console.log(categories);
 }

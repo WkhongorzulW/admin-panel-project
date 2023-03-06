@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { CategoryContext } from "../../contexts/CategoryContext";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { deleteCategory } from "../../services/CategoryServices";
 
 export default function CategoriesTable() {
   const [caterories, setCategories, URL] = useContext(CategoryContext);
@@ -17,6 +18,11 @@ export default function CategoriesTable() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
     setCategories(FETCHED_JSON);
+  }
+
+  async function handleDelete(categoryId) {
+    deleteCategory(setCategories, caterories, categoryId, URL);
+    console.log(categoryId);
   }
 
   const columns = [
@@ -33,7 +39,7 @@ export default function CategoriesTable() {
             <Link
               to={`/product/category/edit/${params.row.id}`}
               state={{
-                role: caterories.filter((r) => r.id === params.row.id),
+                category: caterories.filter((r) => r.id === params.row.id),
               }}
             >
               <Button color={"info"} variant={"outlined"}>
@@ -43,7 +49,7 @@ export default function CategoriesTable() {
             <Button
               color={"error"}
               variant={"contained"}
-              //   onClick={() => handleDelete(params.row.product_category_name)}
+              onClick={() => handleDelete(params.row.id)}
             >
               <DeleteOutlineIcon />
             </Button>
