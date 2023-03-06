@@ -20,7 +20,7 @@ export default function ProductTable() {
   async function fetchProductData() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setProducts(FETCHED_JSON.data);
+    setProducts(FETCHED_JSON);
   }
 
   async function handleDelete(productId) {
@@ -28,20 +28,21 @@ export default function ProductTable() {
   }
 
   const columns = [
-    { field: "id", headerName: "ID", width: 130 },
+    { field: "id", headerName: "Product Id", width: 130 },
     {
-      field: "image",
+      field: "image_path",
       headerName: "Image",
       renderCell: (params) => {
-        return <img src={params.row.image} width="100px" />;
+        return (
+          <img src={params.row.image_path} width="100px" alt="product_image" />
+        );
       },
     },
-    { field: "productname", headerName: "Title", width: 130 },
-    { field: "description", headerName: "Description", width: 150 },
-    { field: "price", headerName: "Price", width: 50 },
-    { field: "stock", headerName: "Stock", width: 80 },
-    { field: "color", headerName: "Color", width: 80 },
-    { field: "category", headerName: "Category", width: 90 },
+    { field: "product_name", headerName: "Title", width: 130 },
+    { field: "product_description", headerName: "Description", width: 150 },
+    { field: "product_price", headerName: "Price", width: 50 },
+    { field: "product_quantity", headerName: "Stock", width: 80 },
+    { field: "product_category_id", headerName: "Category", width: 90 },
     {
       field: "actions",
       headerName: "Actions",

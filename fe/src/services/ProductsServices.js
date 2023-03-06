@@ -1,17 +1,16 @@
 import axios from "axios";
 
 /*------------- POST -------------*/
-async function addProduct(e, setProducts, URL) {
+async function addProduct(e, products, setProducts, URL) {
   e.preventDefault();
 
   const postProductData = {
-    image: e.target.image.value,
-    productname: e.target.productname.value,
-    price: e.target.price.value,
-    stock: e.target.stock.value,
-    color: e.target.color.value,
-    category: e.target.category.value,
-    description: e.target.description.value,
+    productImage: e.target.productImage.value,
+    productName: e.target.productName.value,
+    productPrice: e.target.productPrice.value,
+    quantity: e.target.quantity.value,
+    categoryId: e.target.categoryId.value,
+    productDescription: e.target.productDescription.value,
   };
 
   const FETCHED_DATA = await axios({
@@ -19,7 +18,8 @@ async function addProduct(e, setProducts, URL) {
     method: "POST",
     data: postProductData,
   });
-  setProducts(FETCHED_DATA.data.data);
+  setProducts(FETCHED_DATA);
+  console.log(products);
 }
 
 async function deleteProduct(productId, setProducts, URL) {
@@ -30,21 +30,21 @@ async function deleteProduct(productId, setProducts, URL) {
       productId: productId,
     },
   });
-  setProducts(FETCHED_DATA.data.data);
+  setProducts(FETCHED_DATA);
+  console.log(productId);
 }
 
-async function editProduct(e, setProducts, URL, currentProduct) {
+async function editProduct(e, products, setProducts, URL, currentProduct) {
   e.preventDefault();
 
   const putProductData = {
-    id: currentProduct.id,
-    image: currentProduct.image,
-    productname: currentProduct.productname,
-    price: currentProduct.price,
-    stock: currentProduct.stock,
-    color: currentProduct.color,
-    category: currentProduct.category,
-    description: currentProduct.description,
+    productId: currentProduct.id,
+    prodcutImage: currentProduct.image_path,
+    productName: currentProduct.product_name,
+    productPrice: currentProduct.product_price,
+    quantiry: currentProduct.quantity,
+    categoryId: currentProduct.product_category_id,
+    productDescription: currentProduct.product_description,
   };
 
   const FETCHED_DATA = await axios({
@@ -52,7 +52,7 @@ async function editProduct(e, setProducts, URL, currentProduct) {
     method: "PUT",
     data: putProductData,
   });
-  setProducts(FETCHED_DATA.data.data);
+  setProducts(FETCHED_DATA);
 }
 
 export { addProduct, deleteProduct, editProduct };

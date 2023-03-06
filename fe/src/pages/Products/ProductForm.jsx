@@ -9,10 +9,10 @@ import { ProductContext } from "../../contexts/ProductContext";
 export default function ProductForm() {
   const navigate = useNavigate();
 
-  const { setProducts, URL } = useContext(ProductContext);
+  const { products, setProducts, URL } = useContext(ProductContext);
 
   async function handleSubmit(e) {
-    addProduct(e, setProducts, URL);
+    addProduct(e, products, setProducts, URL);
     navigate("/productlist");
   }
 
@@ -34,48 +34,41 @@ export default function ProductForm() {
             fullWidth={true}
           >
             <TextField
-              name={"image"}
+              name={"productImage"}
               label={"Image URL"}
               variant={"filled"}
               fullWidth={true}
             />
             <TextField
-              name={"productname"}
+              name={"productName"}
               type={"text"}
               label={"Product name"}
               variant={"filled"}
               fullWidth={true}
             />
             <TextField
-              name={"price"}
-              type={"text"}
+              name={"productPrice"}
+              type={"number"}
               label={"Price"}
               variant={"filled"}
               fullWidth={true}
             />
             <TextField
-              name={"stock"}
+              name={"quantity"}
               type={"number"}
-              label={"Stock"}
+              label={"Quantity"}
               variant={"filled"}
               fullWidth={true}
             />
             <TextField
-              name={"color"}
-              type={"text"}
-              label={"Color"}
+              name={"categoryId"}
+              type={"number"}
+              label={"Category Id"}
               variant={"filled"}
               fullWidth={true}
             />
             <TextField
-              name={"category"}
-              type={"text"}
-              label={"Category"}
-              variant={"filled"}
-              fullWidth={true}
-            />
-            <TextField
-              name={"description"}
+              name={"productDescription"}
               type={"text"}
               label={"Description"}
               variant={"filled"}

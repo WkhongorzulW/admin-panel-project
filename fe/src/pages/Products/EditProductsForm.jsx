@@ -7,7 +7,7 @@ import { PEBreadCrumbs } from "../../components/PBreadCrumbs";
 import { ProductContext } from "../../contexts/ProductContext";
 
 export default function EditProductsForm() {
-  const { setProducts, URL } = useContext(ProductContext);
+  const { products, setProducts, URL } = useContext(ProductContext);
 
   const productData = useLocation();
   const navigate = useNavigate();
@@ -17,29 +17,32 @@ export default function EditProductsForm() {
   );
 
   function handlePname(e) {
-    setCurrentProduct({ ...currentProduct, productname: e.target.value });
+    setCurrentProduct({ ...currentProduct, product_name: e.target.value });
   }
   function handlePrice(e) {
-    setCurrentProduct({ ...currentProduct, price: e.target.value });
+    setCurrentProduct({ ...currentProduct, product_price: e.target.value });
   }
   function handleStock(e) {
-    setCurrentProduct({ ...currentProduct, stock: e.target.value });
-  }
-  function handleColor(e) {
-    setCurrentProduct({ ...currentProduct, color: e.target.value });
+    setCurrentProduct({ ...currentProduct, quantity: e.target.value });
   }
   function handleCategory(e) {
-    setCurrentProduct({ ...currentProduct, category: e.target.value });
+    setCurrentProduct({
+      ...currentProduct,
+      product_categoryId: e.target.value,
+    });
   }
   function handleDescription(e) {
-    setCurrentProduct({ ...currentProduct, description: e.target.value });
+    setCurrentProduct({
+      ...currentProduct,
+      product_description: e.target.value,
+    });
   }
   function handleImage(e) {
-    setCurrentProduct({ ...currentProduct, image: e.target.value });
+    setCurrentProduct({ ...currentProduct, image_path: e.target.value });
   }
 
   async function handleEdit(e) {
-    editProduct(e, setProducts, URL, currentProduct);
+    editProduct(e, products, setProducts, URL, currentProduct);
     navigate("/productlist");
   }
 
@@ -62,66 +65,64 @@ export default function EditProductsForm() {
             fullWidth={true}
           >
             <TextField
-              name={"image"}
+              name={"productImage"}
               label={"Image URL"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.image}
+              defaultValue={currentProduct.image_path}
               onChange={handleImage}
             />
             <TextField
-              name={"productname"}
+              name={"productName"}
               type={"text"}
               label={"Product name"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.productname}
+              defaultValue={currentProduct.product_name}
               onChange={handlePname}
             />
             <TextField
-              name={"price"}
+              name={"productPrice"}
               type={"text"}
               label={"Price"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.price}
+              defaultValue={currentProduct.product_price}
               onChange={handlePrice}
             />
             <TextField
-              name={"stock"}
+              name={"quantity"}
               type={"number"}
               label={"Stock"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.stock}
+              defaultValue={currentProduct.product_quantity}
               onChange={handleStock}
             />
             <TextField
-              name={"color"}
-              type={"text"}
-              label={"Color"}
+              name={"categoryId"}
+              type={"number"}
+              label={"Category Id"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.color}
-              onChange={handleColor}
+              defaultValue={currentProduct.product_category_id}
             />
             <TextField
-              name={"category"}
-              type={"text"}
-              label={"Category"}
-              variant={"filled"}
-              fullWidth={true}
-              defaultValue={currentProduct.category}
-              onChange={handleCategory}
-            />
-            <TextField
-              name={"description"}
+              name={"productDescription"}
               type={"text"}
               label={"Description"}
               variant={"filled"}
               fullWidth={true}
-              defaultValue={currentProduct.description}
+              defaultValue={currentProduct.product_description}
               onChange={handleDescription}
+            />
+            <TextField
+              name={"productId"}
+              type={"number"}
+              label={"Product Id"}
+              variant={"filled"}
+              fullWidth={true}
+              defaultValue={currentProduct.id}
             />
           </FormControl>
           <Link to={"/productlist"}>
