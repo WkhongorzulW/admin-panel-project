@@ -1,7 +1,7 @@
 import axios from "axios";
 
 /*------------- POST ------------*/
-export async function addRole(e, setUserRoles, URL) {
+export async function addRole(e, userRoles, setUserRoles, URL) {
   e.preventDefault();
 
   const FETCHED_DATA = await axios({
@@ -11,8 +11,7 @@ export async function addRole(e, setUserRoles, URL) {
       roleName: e.target.roleName.value,
     },
   });
-  console.log(FETCHED_DATA.data);
-  setUserRoles(FETCHED_DATA.data);
+  setUserRoles(FETCHED_DATA);
 }
 
 /*---------------- DELETE -----------------*/
@@ -24,11 +23,11 @@ export async function deleteRole(setUserRoles, roleName, URL) {
       roleName: roleName,
     },
   });
-  setUserRoles(FETCHET_DATA.data);
+  setUserRoles(FETCHET_DATA);
 }
 
 /*------------- EDIT --------------*/
-export async function editRoleName(setUserRoles, URL, currentRole) {
+export async function editRoleName(userRoles, setUserRoles, URL, currentRole) {
   const FETCHED_DATA = await axios({
     url: URL,
     method: "PUT",
@@ -37,6 +36,5 @@ export async function editRoleName(setUserRoles, URL, currentRole) {
       roleName: currentRole.user_role_name,
     },
   });
-  console.log(currentRole);
-  setUserRoles(FETCHED_DATA.data);
+  setUserRoles(FETCHED_DATA);
 }

@@ -6,11 +6,11 @@ import { CategoryContext } from "../../contexts/CategoryContext";
 import { addCategory } from "../../services/CategoryServices";
 
 export default function CategoryForm() {
-  const [setCategories, URL] = useContext(CategoryContext);
+  const [categories, setCategories, URL] = useContext(CategoryContext);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    addCategory(e, setCategories, URL);
+    addCategory(e, categories, setCategories, URL);
     navigate("/product/category/list");
   }
 

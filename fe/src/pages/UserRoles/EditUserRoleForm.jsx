@@ -6,7 +6,7 @@ import { UserRoleContext } from "../../contexts/UserRoleContext";
 import { editRoleName } from "../../services/RoleServices";
 
 export default function EditUserRoleForm() {
-  const [setUserRoles, URL] = useContext(UserRoleContext);
+  const [userRoles, setUserRoles, URL] = useContext(UserRoleContext);
   const userRoleData = useLocation();
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ export default function EditUserRoleForm() {
   }
 
   async function handleEdit() {
-    editRoleName(setUserRoles, URL, currentRole);
+    editRoleName(userRoles, setUserRoles, URL, currentRole);
     navigate("/user/role/list");
   }
 

@@ -9,7 +9,6 @@ export function LIuser() {
   const [isOpen, setIsOpen] = useState(false);
   function handleClick() {
     setIsOpen(!isOpen);
-    console.log("clicked");
   }
   return (
     <div>
@@ -23,6 +22,12 @@ export function LIuser() {
           </Link>
           <Link to={"/adduser"}>
             <ListItemText primary={"Add user"} />
+          </Link>
+          <Link to={"/user/role/list"}>
+            <ListItemText primary="User role list" />
+          </Link>
+          <Link to={"/user/role/add"}>
+            <ListItemText primary="Add user role" />
           </Link>
           <Link to={"/user/login"}>
             <ListItemText primary="Login" />

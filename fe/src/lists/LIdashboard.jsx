@@ -8,7 +8,6 @@ export function LIdashboard() {
   const [isOpen, setIsOpen] = useState(false);
   function handleClick() {
     setIsOpen(!isOpen);
-    console.log("clicked");
   }
   return (
     <div>
@@ -22,6 +21,12 @@ export function LIdashboard() {
           </MenuItem>
           <MenuItem>
             <Link to={"/addproduct"}>Add product</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to={"/product/category/list"}>Category list</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to={"/product/category/add"}>Add category</Link>
           </MenuItem>
         </List>
       )}
