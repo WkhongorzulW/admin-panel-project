@@ -17,11 +17,11 @@ product_router.get("/products", async (request, response) => {
 product_router.post("/products", async (request, response) => {
   const body = request.body;
   const result = await addProduct(
-    body.productImage,
     body.productName,
     body.productPrice,
     body.quantity,
     body.categoryId,
+    body.productImage,
     body.productDescription
   );
 

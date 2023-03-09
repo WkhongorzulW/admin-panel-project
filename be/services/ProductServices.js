@@ -15,10 +15,10 @@ export async function addProduct(
   quantity,
   productDescription
 ) {
-  const query = `insert into product (image_path, product_name, product_price, product_quantity, product_category_id, product_description) values (?, ?, ?, ?, ?, ?);`;
+  const query = `insert into product ( product_price, product_quantity, product_category_id, image_path, product_name, product_description) values (?, ?, ?, ?, ?, ?)`;
 
   const [rows] = await pool.query(query, [
-    `${productImage}`,
+    productImage,
     productName,
     productPrice,
     quantity,
@@ -45,7 +45,7 @@ export async function editProduct(
   quantity,
   productDescription
 ) {
-  const query = `update product set image_path='${productImage}', product_name='${productName}', product_price='${productPrice}', quantity='${quantity}', product_description='${productDescription}' where product_id=${productId}`;
+  const query = `update product set image_path='${productImage}', product_name='${productName}', product_price=${productPrice}, quantity=${quantity}, product_description='${productDescription}' where product_id=${productId}`;
 
   console.log(query);
 
