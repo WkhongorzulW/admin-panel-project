@@ -53,6 +53,7 @@ async function editProduct(e, products, setProducts, URL, currentProduct) {
     data: putProductData,
   });
   setProducts(FETCHED_DATA);
+  console.log(products);
 }
 
 export { addProduct, deleteProduct, editProduct };
