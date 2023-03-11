@@ -24,27 +24,24 @@ export default function EditUsersForm() {
 
   async function handleEdit(e) {
     e.preventDefault();
-    editUser(e, setUsers, URL, currentUser);
-    navigate("/userlist");
+    editUser(setUsers, URL, currentUser);
+    navigate("/user/list");
   }
 
-  function handleFirstname(e) {
-    setCurrentUser({ ...currentUser, firstname: e.target.value });
-  }
   function handleLastname(e) {
-    setCurrentUser({ ...currentUser, lastname: e.target.value });
+    setCurrentUser({ ...currentUser, last_name: e.target.value });
   }
   function handleEmail(e) {
     setCurrentUser({ ...currentUser, email: e.target.value });
   }
-  function handleAge(e) {
-    setCurrentUser({ ...currentUser, age: e.target.value });
-  }
   function handlePhoneNumber(e) {
-    setCurrentUser({ ...currentUser, phonenumber: e.target.value });
+    setCurrentUser({ ...currentUser, phone_number: e.target.value });
+  }
+  function handleAddress(e) {
+    setCurrentUser({ ...currentUser, address: e.target.value });
   }
   function handleRole(e) {
-    setCurrentUser({ ...currentUser, role: e.target.value });
+    setCurrentUser({ ...currentUser, user_role_id: e.target.value });
   }
 
   return (
@@ -65,22 +62,29 @@ export default function EditUsersForm() {
           fullWidth={true}
         >
           <TextField
-            name={"firstname"}
+            name={"firstName"}
             type={"text"}
             label={"First name"}
             variant={"outlined"}
             fullWidth={true}
-            defaultValue={currentUser.firstname}
-            onChange={handleFirstname}
+            defaultValue={currentUser.first_name}
           />
           <TextField
-            name={"lastname"}
+            name={"lastName"}
             type={"text"}
             label={"Last name"}
             variant={"outlined"}
             fullWidth={true}
-            defaultValue={currentUser.lastname}
+            defaultValue={currentUser.last_name}
             onChange={handleLastname}
+          />
+          <TextField
+            name={"birthDate"}
+            type={"text"}
+            label={"Birth Date"}
+            variant={"outlined"}
+            fullWidth={true}
+            defaultValue={currentUser.birth_date}
           />
           <TextField
             name={"email"}
@@ -92,42 +96,32 @@ export default function EditUsersForm() {
             onChange={handleEmail}
           />
           <TextField
-            name={"age"}
-            type={"number"}
-            label={"Age"}
+            name={"address"}
+            type={"text"}
+            label={"Address"}
             variant={"outlined"}
             fullWidth={true}
-            defaultValue={currentUser.age}
-            onChange={handleAge}
+            defaultValue={currentUser.address}
+            onChange={handleAddress}
           />
           <TextField
-            name={"phonenumber"}
-            type={"tel"}
+            name={"phonenNmber"}
+            type={"text"}
             label={"Phone number"}
             variant={"outlined"}
             fullWidth={true}
-            defaultValue={currentUser.phonenumber}
+            defaultValue={currentUser.phone_number}
             onChange={handlePhoneNumber}
           />
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
           <TextField
-            name={"role"}
+            name={"roleId"}
             type={"text"}
-            label={"Role"}
+            label={"Role Id"}
             variant={"outlined"}
             fullWidth={true}
-            defaultValue={currentUser.role}
+            defaultValue={currentUser.user_role_id}
             onChange={handleRole}
           />
-          <TextField
-            name={"image"}
-            label={"Image URL"}
-            variant={"outlined"}
-            fullWidth={true}
-          />
-
           <TextField
             name={"password"}
             type={"password"}
@@ -136,7 +130,7 @@ export default function EditUsersForm() {
             fullWidth={true}
           />
         </FormControl>
-        <Link to={"/userlist"}>
+        <Link to={"/user/list"}>
           <Button color="info" variant="contained" sx={{ marginTop: 2 }}>
             BACK
           </Button>

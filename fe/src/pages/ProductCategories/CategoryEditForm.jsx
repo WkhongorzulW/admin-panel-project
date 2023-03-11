@@ -66,8 +66,8 @@ export default function EditCategoryForm() {
             <TextField
               name="categoryId"
               label="Category id"
+              type={"number"}
               variant="filled"
-              defaultValue={currentCategory.id}
             />
           </FormControl>
           <Link to="/product/category/list">

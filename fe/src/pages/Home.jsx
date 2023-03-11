@@ -45,8 +45,8 @@ export default function Home() {
         <Route path="/productlist" element={<ProductTable />} />
         <Route path="/addproduct" element={<ProductForm />} />
         <Route path="/editproduct/:id" element={<EditProductsForm />} />
-        <Route path="/userlist" element={<UsersTable />} />
-        <Route path="/adduser" element={<UserForm />} />
+        <Route path="/user/list" element={<UsersTable />} />
+        <Route path="/user/add" element={<UserForm />} />
         <Route path={"/edituser/:id"} element={<EditUsersForm />} />
         <Route path="/user/login" element={<LoginForm />} />
         <Route path="/user/role/add" element={<UserRoleForm />} />

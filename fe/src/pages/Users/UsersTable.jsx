@@ -19,32 +19,24 @@ export default function UsersTable() {
   async function fetchUserData() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
-    setUsers(FETCHED_JSON.data);
+    setUsers(FETCHED_JSON);
   }
 
   async function handleDelete(userId) {
-    deleteUser(userId, setUsers, URL);
+    //deleteUser(userId, setUsers, URL);
   }
 
   const columns = [
     { field: "id", headerName: "ID", width: 130 },
-    { field: "firstname", headerName: "First name", width: 130 },
-    { field: "lastname", headerName: "Last name", width: 130 },
-    { field: "phonenumber", headerName: "Phone number", width: 130 },
+    { field: "first_name", headerName: "First name", width: 130 },
+    { field: "last_name", headerName: "Last name", width: 130 },
+    { field: "phone_number", headerName: "Phone number", width: 130 },
     { field: "email", headerName: "Email", width: 150 },
+    { field: "birth_date", headerName: "Birth Date", width: 150 },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 80,
-    },
-    {
-      field: "role",
+      field: "user_role_id",
       headerName: "Role",
       with: 120,
-      renderCell: (params) => {
-        return <div>{params.row.role.name}</div>;
-      },
     },
     {
       field: "actions",
@@ -85,9 +77,8 @@ export default function UsersTable() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
       />
-      <Link to={"/adduser"}>
+      <Link to={"/user/add"}>
         <Button color="info" variant="contained" sx={{ marginTop: 5 }}>
           BACK
         </Button>

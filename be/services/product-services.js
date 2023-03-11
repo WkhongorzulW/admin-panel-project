@@ -8,21 +8,18 @@ export async function getProducts() {
 }
 
 export async function addProduct(
-  categoryId,
   productImage,
   productName,
   productPrice,
   quantity,
+  categoryId,
   productDescription
 ) {
-  const query = `insert into product ( product_price, product_quantity, product_category_id, image_path, product_name, product_description) values (?, ?, ?, ?, ?, ?)`;
+  const query = `insert into product (image_path, product_name, product_price, product_quantity, product_category_id, product_description) values (?, ?, ${productPrice}, ${quantity}, ${categoryId}, ?);`;
 
   const [rows] = await pool.query(query, [
     productImage,
     productName,
-    productPrice,
-    quantity,
-    categoryId,
     productDescription,
   ]);
 

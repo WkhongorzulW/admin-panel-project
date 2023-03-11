@@ -4,7 +4,7 @@ import {
   deleteCategories,
   editCategories,
   getCategories,
-} from "../services/ProductCategoryServices.js";
+} from "../services/product-category-services.js";
 
 const category_router = express.Router();
 
@@ -34,9 +34,9 @@ category_router.put("/categories", async (request, response) => {
 });
 
 category_router.delete("/categories", async (request, response) => {
-  const body = request.body;
+  const { categoryId } = request.body;
 
-  const result = await deleteCategories(body.categoryId);
+  const result = await deleteCategories(categoryId);
   console.log(result);
 
   response.status(200).send(result);

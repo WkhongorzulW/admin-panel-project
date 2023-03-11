@@ -1,8 +1,9 @@
 import axios from "axios";
 
 /*------------- POST -------------*/
-async function addProduct(e, products, setProducts, URL) {
+export async function addProduct(e, products, setProducts, URL) {
   e.preventDefault();
+  console.log(e.target.categoryId.value);
 
   const postProductData = {
     productImage: e.target.productImage.value,
@@ -19,41 +20,38 @@ async function addProduct(e, products, setProducts, URL) {
     data: postProductData,
   });
   setProducts(FETCHED_DATA);
-  console.log(products);
 }
 
-async function deleteProduct(productId, setProducts, URL) {
-  const FETCHED_DATA = await axios({
-    url: URL,
-    method: "DELETE",
-    data: {
-      productId: productId,
-    },
-  });
-  setProducts(FETCHED_DATA);
-  console.log(productId);
-}
+// async function deleteProduct(productId, setProducts, URL) {
+//   const FETCHED_DATA = await axios({
+//     url: URL,
+//     method: "DELETE",
+//     data: {
+//       productId: productId,
+//     },
+//   });
+//   setProducts(FETCHED_DATA);
+//   console.log(productId);
+// }
 
-async function editProduct(e, products, setProducts, URL, currentProduct) {
-  e.preventDefault();
+// async function editProduct(e, products, setProducts, URL, currentProduct) {
+//   e.preventDefault();
 
-  const putProductData = {
-    productId: currentProduct.id,
-    prodcutImage: currentProduct.image_path,
-    productName: currentProduct.product_name,
-    productPrice: currentProduct.product_price,
-    quantiry: currentProduct.quantity,
-    categoryId: currentProduct.product_category_id,
-    productDescription: currentProduct.product_description,
-  };
+//   const putProductData = {
+//     productId: currentProduct.id,
+//     prodcutImage: currentProduct.image_path,
+//     productName: currentProduct.product_name,
+//     productPrice: currentProduct.product_price,
+//     quantiry: currentProduct.quantity,
+//     categoryId: currentProduct.product_category_id,
+//     productDescription: currentProduct.product_description,
+//   };
 
-  const FETCHED_DATA = await axios({
-    url: URL,
-    method: "PUT",
-    data: putProductData,
-  });
-  setProducts(FETCHED_DATA);
-  console.log(products);
-}
-
-export { addProduct, deleteProduct, editProduct };
+//   const FETCHED_DATA = await axios({
+//     url: URL,
+//     method: "PUT",
+//     data: putProductData,
+//   });
+//   setProducts(FETCHED_DATA);
+//   console.log(products);
+// }

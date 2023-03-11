@@ -4,7 +4,7 @@ import {
   deleteProduct,
   editProduct,
   getProducts,
-} from "../services/ProductServices.js";
+} from "../services/product-services.js";
 
 const product_router = express.Router();
 
@@ -15,14 +15,21 @@ product_router.get("/products", async (request, response) => {
 });
 
 product_router.post("/products", async (request, response) => {
-  const body = request.body;
+  const {
+    productImage,
+    productName,
+    productPrice,
+    quantity,
+    categoryId,
+    productDescription,
+  } = request.body;
   const result = await addProduct(
-    body.productName,
-    body.productPrice,
-    body.quantity,
-    body.categoryId,
-    body.productImage,
-    body.productDescription
+    productImage,
+    productName,
+    productPrice,
+    quantity,
+    categoryId,
+    productDescription
   );
 
   response.status(200).send(result);
