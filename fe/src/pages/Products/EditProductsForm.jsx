@@ -42,7 +42,7 @@ export default function EditProductsForm() {
   }
 
   async function handleEdit(e) {
-    editProduct(e, products, setProducts, URL, currentProduct);
+    //editProduct(e, products, setProducts, URL, currentProduct);
     navigate("/productlist");
   }
 

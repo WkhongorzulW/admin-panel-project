@@ -17,10 +17,10 @@ export function LIuser() {
       </Link>
       {isOpen && (
         <List>
-          <Link to={"/userlist"}>
+          <Link to={"/user/list"}>
             <ListItemText primary={"User list"} />
           </Link>
-          <Link to={"/adduser"}>
+          <Link to={"/user/add"}>
             <ListItemText primary={"Add user"} />
           </Link>
           <Link to={"/user/role/list"}>

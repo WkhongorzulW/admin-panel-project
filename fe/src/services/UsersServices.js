@@ -1,55 +1,38 @@
 import axios from "axios";
 
-/*------------- POST -------------*/
-async function addUsers(e, setUsers, URL, currentRole) {
+export async function addUsers(e, users, setUsers, URL) {
   e.preventDefault();
-
-  const postUserData = {
-    firstname: e.target.firstname.value,
-    lastname: e.target.lastname.value,
-    email: e.target.email.value,
-    age: e.target.age.value,
-    phonenumber: e.target.phonenumber.value,
-    password: e.target.password.value,
-    role: currentRole,
-  };
 
   const FETCHED_DATA = await axios({
     url: URL,
     method: "POST",
-    data: postUserData,
-  });
-  setUsers(FETCHED_DATA.data.data);
-}
-
-async function deleteUser(userId, setUsers, URL) {
-  const FETCHED_DATA = await axios({
-    url: URL,
-    method: "DELETE",
     data: {
-      userId: userId,
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      birthDate: e.target.birthDate.value,
+      email: e.target.email.value,
+      phoneNumber: e.target.phoneNumber.value,
+      roleId: e.target.roleId.value,
+      address: e.target.address.value,
     },
   });
-  setUsers(FETCHED_DATA.data.data);
+  setUsers(FETCHED_DATA);
 }
 
-async function editUser(e, setUsers, URL, currentUser) {
-  const putUserData = {
-    id: currentUser.id,
-    firstname: currentUser.firstname,
-    lastname: currentUser.lastname,
+export async function editUser(setUsers, URL, currentUser) {
+  const editedUser = {
+    userId: currentUser.id,
+    lastName: currentUser.last_name,
     email: currentUser.email,
-    age: currentUser.age,
-    phonenumber: currentUser.phonenumber,
-    role: currentUser.currentRole,
+    phoneNumber: currentUser.phone_number,
+    roleId: currentUser.user_role_id,
+    address: currentUser.address,
   };
 
   const FETCHED_DATA = await axios({
     url: URL,
     method: "PUT",
-    data: putUserData,
+    data: editedUser,
   });
-  setUsers(FETCHED_DATA.data.data);
+  setUsers(FETCHED_DATA);
 }
-
-export { addUsers, deleteUser, editUser };

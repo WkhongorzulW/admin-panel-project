@@ -24,7 +24,7 @@ export default function ProductTable() {
   }
 
   async function handleDelete(productId) {
-    deleteProduct(productId, setProducts, URL);
+    //deleteProduct(productId, setProducts, URL);
   }
 
   const columns = [

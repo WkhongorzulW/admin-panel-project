@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import role_router from "./routes/UserRole.js";
 import category_router from "./routes/ProdcutCategories.js";
 import product_router from "./routes/Products.js";
+import user_router from "./routes/Users.js";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(role_router);
 app.use(category_router);
 app.use(product_router);
+app.use(user_router);
 
 /*--------------- GET /product/ --------------*/
 // app.get("/products", (request, response) => {

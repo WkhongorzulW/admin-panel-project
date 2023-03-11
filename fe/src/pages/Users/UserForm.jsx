@@ -3,11 +3,6 @@ import {
   Box,
   Button,
   FormControl,
-  FormControlLabel,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Radio,
   Select,
   TextField,
   Typography,
@@ -15,39 +10,17 @@ import {
 import { useNavigate } from "react-router-dom";
 import { addUsers } from "../../services/UsersServices";
 import { UFBreadCrumbs } from "../../components/UBreadCrumbs";
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
 export default function UserForm() {
-  const {
-    roles,
-    setRoles,
-    currentRole,
-    setCurrentRole,
-    setUsers,
-    URL,
-    ROLE_URL,
-  } = useContext(UserContext);
-
-  useEffect(() => {
-    fetchRoles();
-  }, []);
-
-  async function fetchRoles() {
-    const FETCHED_DATA = await fetch(ROLE_URL);
-    const FETCHED_JSON = await FETCHED_DATA.json();
-    setRoles(FETCHED_JSON.data);
-  }
-
-  function handleSelectChange(e) {
-    setCurrentRole(e.target.value);
-  }
+  const { users, setUsers, URL } = useContext(UserContext);
 
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    addUsers(e, setUsers, URL, currentRole);
-    navigate("/userlist");
+    addUsers(e, users, setUsers, URL);
+    navigate("/user/list");
   }
 
   return (
@@ -69,18 +42,24 @@ export default function UserForm() {
             fullWidth={true}
           >
             <TextField
-              name={"firstname"}
+              name={"firstName"}
               type={"text"}
               label={"First name"}
               variant={"filled"}
               fullWidth={true}
             />
             <TextField
-              name={"lastname"}
+              name={"lastName"}
               type={"text"}
               label={"Last name"}
               variant={"filled"}
               fullWidth={true}
+            />
+            <TextField
+              name="birthDate"
+              type="date"
+              label="Birth Date"
+              variant="filled"
             />
             <TextField
               name={"email"}
@@ -90,44 +69,32 @@ export default function UserForm() {
               fullWidth={true}
             />
             <TextField
-              name={"age"}
-              type={"number"}
-              label={"Age"}
-              variant={"filled"}
-              fullWidth={true}
-            />
-            <TextField
-              name={"phonenumber"}
-              type={"tel"}
+              name={"phoneNumber"}
+              type={"text"}
               label={"Phone number"}
               variant={"filled"}
               fullWidth={true}
             />
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-            <Grid item xs={12}>
-              <InputLabel>User Roles</InputLabel>
-              <Select
-                id="role-selector"
-                value={currentRole}
-                label="Roles"
-                onChange={handleSelectChange}
-              >
-                {roles &&
-                  roles.map((role, index) => {
-                    return (
-                      <MenuItem key={index} value={role.id}>
-                        {role.name}
-                      </MenuItem>
-                    );
-                  })}
+            <label>
+              Gender
+              <Select name="gender">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="o">Others</option>
               </Select>
-            </Grid>
+            </label>
+            <TextField
+              name="roleId"
+              type="number"
+              variant="filled"
+              label="Role Id"
+            />
+            <TextField
+              name="address"
+              type="text"
+              variant="filled"
+              label="Address"
+            />
             <TextField
               name={"password"}
               type={"password"}
