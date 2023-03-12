@@ -12,7 +12,7 @@ export default function ProductForm() {
   const { products, setProducts, URL } = useContext(ProductContext);
 
   async function handleSubmit(e) {
-    addProduct(e, products, setProducts, URL);
+    addProduct(e, setProducts, URL);
     navigate("/productlist");
   }
 

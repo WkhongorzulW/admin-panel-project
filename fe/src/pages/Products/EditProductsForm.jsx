@@ -23,12 +23,12 @@ export default function EditProductsForm() {
     setCurrentProduct({ ...currentProduct, product_price: e.target.value });
   }
   function handleStock(e) {
-    setCurrentProduct({ ...currentProduct, quantity: e.target.value });
+    setCurrentProduct({ ...currentProduct, product_quantity: e.target.value });
   }
   function handleCategory(e) {
     setCurrentProduct({
       ...currentProduct,
-      product_categoryId: e.target.value,
+      product_category_id: e.target.value,
     });
   }
   function handleDescription(e) {
@@ -42,7 +42,7 @@ export default function EditProductsForm() {
   }
 
   async function handleEdit(e) {
-    //editProduct(e, products, setProducts, URL, currentProduct);
+    editProduct(e, setProducts, URL, currentProduct);
     navigate("/productlist");
   }
 
@@ -106,6 +106,7 @@ export default function EditProductsForm() {
               variant={"filled"}
               fullWidth={true}
               defaultValue={currentProduct.product_category_id}
+              onChange={handleCategory}
             />
             <TextField
               name={"productDescription"}
