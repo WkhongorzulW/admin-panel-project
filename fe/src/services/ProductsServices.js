@@ -1,7 +1,7 @@
 import axios from "axios";
 
 /*------------- POST -------------*/
-export async function addProduct(e, products, setProducts, URL) {
+export async function addProduct(e, setProducts, URL) {
   e.preventDefault();
   console.log(e.target.categoryId.value);
 
@@ -34,24 +34,26 @@ export async function addProduct(e, products, setProducts, URL) {
 //   console.log(productId);
 // }
 
-// async function editProduct(e, products, setProducts, URL, currentProduct) {
-//   e.preventDefault();
+export async function editProduct(e, setProducts, URL, currentProduct) {
+  e.preventDefault();
 
-//   const putProductData = {
-//     productId: currentProduct.id,
-//     prodcutImage: currentProduct.image_path,
-//     productName: currentProduct.product_name,
-//     productPrice: currentProduct.product_price,
-//     quantiry: currentProduct.quantity,
-//     categoryId: currentProduct.product_category_id,
-//     productDescription: currentProduct.product_description,
-//   };
+  const putProductData = {
+    productId: currentProduct.id,
+    prodcutImage: currentProduct.image_path,
+    productName: currentProduct.product_name,
+    productPrice: currentProduct.product_price,
+    quantity: currentProduct.product_quantity,
+    categoryId: currentProduct.product_category_id,
+    productDescription: currentProduct.product_description,
+  };
 
-//   const FETCHED_DATA = await axios({
-//     url: URL,
-//     method: "PUT",
-//     data: putProductData,
-//   });
-//   setProducts(FETCHED_DATA);
-//   console.log(products);
-// }
+  console.log(putProductData);
+
+  const FETCHED_DATA = await axios({
+    url: URL,
+    method: "PUT",
+    data: putProductData,
+  });
+  console.log(FETCHED_DATA);
+  setProducts(FETCHED_DATA);
+}

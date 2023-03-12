@@ -38,14 +38,23 @@ product_router.post("/products", async (request, response) => {
 product_router.put(
   ("/products",
   async (request, response) => {
-    const body = request.body;
+    const {
+      productId,
+      productImage,
+      productName,
+      productPrice,
+      quantity,
+      categoryId,
+      productDescription,
+    } = request.body;
     const result = await editProduct(
-      body.productId,
-      body.productImage,
-      body.productName,
-      body.productPrice,
-      body.quantity,
-      body.productDescription
+      productId,
+      productImage,
+      productName,
+      productPrice,
+      quantity,
+      categoryId,
+      productDescription
     );
     console.log(body);
 

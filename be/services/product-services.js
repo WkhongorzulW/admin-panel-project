@@ -40,9 +40,10 @@ export async function editProduct(
   productName,
   productPrice,
   quantity,
+  categoryId,
   productDescription
 ) {
-  const query = `update product set image_path='${productImage}', product_name='${productName}', product_price=${productPrice}, quantity=${quantity}, product_description='${productDescription}' where product_id=${productId}`;
+  const query = `update product set image_path='${productImage}', product_name='${productName}', product_price=${productPrice}, quantity=${quantity}, product_category_id='${categoryId}', product_description='${productDescription}' where product_id=${productId}`;
 
   console.log(query);
 
