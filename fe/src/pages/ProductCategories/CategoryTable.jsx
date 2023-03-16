@@ -17,6 +17,9 @@ export default function CategoriesTable() {
   async function fetchCategories() {
     const FETCHED_DATA = await fetch(URL);
     const FETCHED_JSON = await FETCHED_DATA.json();
+
+    const parseJSONData = JSON.parse(FETCHED_JSON);
+    console.log(parseJSONData);
     setCategories(FETCHED_JSON);
   }
 
